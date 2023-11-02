@@ -53,6 +53,26 @@ public class Alert {
                 .show();
     }
 
+
+    public static void confirmLogin(
+            Context context,
+            String title,
+            String message,
+            final OnDialogButtonClickListener listener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    if (listener != null) {
+                        listener.onPositiveButtonClick();
+                    }
+                })
+                .show();
+    }
+
+
+
     public static void alert(
             Context context,
             String title,

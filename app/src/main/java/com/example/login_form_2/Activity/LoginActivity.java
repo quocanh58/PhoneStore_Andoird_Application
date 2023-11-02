@@ -3,6 +3,7 @@ package com.example.login_form_2.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +12,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.login_form_2.R;
+import com.example.login_form_2.model.login.LoginReponse;
+import com.example.login_form_2.model.login.LoginRequest;
+import com.example.login_form_2.retrofit.APIClient;
+import com.example.login_form_2.retrofit_interface.LoginServices;
+import com.example.login_form_2.utils.Alert;
+import com.example.login_form_2.utils.LoadingDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class LoginActivity extends AppCompatActivity {
+    Context that = this;
     private FirebaseAuth mAuth;
 
     EditText edtUsername, edtPassword;
@@ -43,32 +55,60 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth = FirebaseAuth.getInstance();
-                mAuth.signInWithEmailAndPassword(edtUsername.getText().toString(),
-                        edtPassword.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()){
-                                    if (mAuth.getCurrentUser().isEmailVerified()){
-                                        Toast.makeText(LoginActivity.this, "Login with email successful.",
-                                                Toast.LENGTH_SHORT).show();
-                                        Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
-                                        startActivity(intents);
-                                    }else {
-                                        Toast.makeText(LoginActivity.this, "Please verify your email address.",
-                                                Toast.LENGTH_SHORT).show();
+        btnLogin.setOnClickListener(view -> {
+
+
+            LoadingDialog.setLoading(that,true);
+            mAuth = FirebaseAuth.getInstance();
+            mAuth.signInWithEmailAndPassword(edtUsername.getText().toString(),
+                    edtPassword.getText().toString())
+                    .addOnFailureListener(e -> {
+                        e.printStackTrace();
+//                        Alert.alert(that,"Lỗi",e.getMessage());
+                        LoadingDialog.setLoading(that,false);
+                    })
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()){
+                            if (mAuth.getCurrentUser().isEmailVerified()){
+                                LoginRequest request = new LoginRequest(edtUsername.getText().toString(),edtPassword.getText().toString());
+
+                                Call<LoginReponse> call = APIClient.getClient().create(LoginServices.class).loginUser(request);
+                                call.enqueue(new Callback<LoginReponse>() {
+                                    @Override
+                                    public void onResponse(Call<LoginReponse> call, Response<LoginReponse> response) {
+                                        LoadingDialog.setLoading(that,false);
+                                        LoginReponse reponse = response.body();
+                                        Alert.confirmLogin(that, "Đăng nhập", reponse.message, new Alert.OnDialogButtonClickListener() {
+                                            @Override
+                                            public void onPositiveButtonClick() {
+                                                Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                startActivity(intents);
+                                                finish();
+                                            }
+
+                                            @Override
+                                            public void onNegativeButtonClick() {
+
+                                            }
+                                        });
                                     }
-                                }else {
-                                    Toast.makeText(LoginActivity.this, "Email or password is incorrect.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+
+                                    @Override
+                                    public void onFailure(Call<LoginReponse> call, Throwable t) {
+                                        t.printStackTrace();
+                                        LoadingDialog.setLoading(that,false);
+                                        Alert.alert(that, "onFailure ", t.getMessage());
+                                    }
+                                });
+                            }else {
+                                Alert.alert(that,"Please verify your email address.");
+
                             }
-                        });
-            }
+                        }else {
+                            Alert.alert(that,"Email or password is incorrect.");
+
+                        }
+                    });
         });
     }
 
