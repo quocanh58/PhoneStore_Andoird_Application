@@ -47,65 +47,64 @@ public class LoginActivity extends AppCompatActivity {
     private void addEvent() {
 
 
-        btnSignUpEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
+        btnSignUpEmail.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
 
         btnLogin.setOnClickListener(view -> {
 
 
-            LoadingDialog.setLoading(that,true);
+            LoadingDialog.setLoading(that, true);
             mAuth = FirebaseAuth.getInstance();
             mAuth.signInWithEmailAndPassword(edtUsername.getText().toString(),
-                    edtPassword.getText().toString())
+                            edtPassword.getText().toString())
                     .addOnFailureListener(e -> {
                         e.printStackTrace();
 //                        Alert.alert(that,"Lỗi",e.getMessage());
-                        LoadingDialog.setLoading(that,false);
+                        LoadingDialog.setLoading(that, false);
                     })
                     .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()){
-                            if (mAuth.getCurrentUser().isEmailVerified()){
-                                LoginRequest request = new LoginRequest(edtUsername.getText().toString(),edtPassword.getText().toString());
+                        if (task.isSuccessful()) {
+                            if (mAuth.getCurrentUser().isEmailVerified()) {
+                                LoginRequest request = new LoginRequest(edtUsername.getText().toString(), edtPassword.getText().toString());
 
                                 Call<LoginReponse> call = APIClient.getClient().create(LoginServices.class).loginUser(request);
                                 call.enqueue(new Callback<LoginReponse>() {
                                     @Override
                                     public void onResponse(Call<LoginReponse> call, Response<LoginReponse> response) {
-                                        LoadingDialog.setLoading(that,false);
+                                        LoadingDialog.setLoading(that, false);
                                         LoginReponse reponse = response.body();
-                                        Alert.confirmLogin(that, "Đăng nhập", reponse.message, new Alert.OnDialogButtonClickListener() {
-                                            @Override
-                                            public void onPositiveButtonClick() {
-                                                Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
-                                                startActivity(intents);
-                                                finish();
-                                            }
+                                        if (reponse.result == 1) {
+                                            Alert.confirmLogin(that, "Đăng nhập", reponse.message, new Alert.OnDialogButtonClickListener() {
+                                                @Override
+                                                public void onPositiveButtonClick() {
+                                                    Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                    startActivity(intents);
+                                                    finish();
+                                                }
 
-                                            @Override
-                                            public void onNegativeButtonClick() {
+                                                @Override
+                                                public void onNegativeButtonClick() {
 
-                                            }
-                                        });
+                                                }
+                                            });
+                                        }
                                     }
 
                                     @Override
                                     public void onFailure(Call<LoginReponse> call, Throwable t) {
                                         t.printStackTrace();
-                                        LoadingDialog.setLoading(that,false);
+                                        LoadingDialog.setLoading(that, false);
                                         Alert.alert(that, "onFailure ", t.getMessage());
                                     }
                                 });
-                            }else {
-                                Alert.alert(that,"Please verify your email address.");
+                            } else {
+                                Alert.alert(that, "Please verify your email address.");
 
                             }
-                        }else {
-                            Alert.alert(that,"Email or password is incorrect.");
+                        } else {
+                            Alert.alert(that, "Email or password is incorrect.");
 
                         }
                     });
