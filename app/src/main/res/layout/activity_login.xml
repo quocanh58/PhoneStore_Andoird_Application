@@ -62,16 +62,10 @@
             android:layout_width="165dp"
             android:layout_height="60dp"
             android:layout_marginHorizontal="13dp"
-            android:text="Login Email"
+            android:text="Login"
             android:textSize="17dp" />
 
-        <Button
-            android:id="@+id/btnCheckOTP"
-            android:layout_width="165dp"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="13dp"
-            android:text="Login OTP"
-            android:textSize="17dp" />
+
     </LinearLayout>
 
     <Button

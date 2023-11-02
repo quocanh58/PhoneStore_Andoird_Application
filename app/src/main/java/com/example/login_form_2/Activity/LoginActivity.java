@@ -33,18 +33,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void addEvent() {
-        btnCheckOTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, SendOTPActivity.class);
-                startActivity(i);
-            }
-        });
+
 
         btnSignUpEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, VerifyEmailActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,6 +77,6 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin1);
         btnSignUpEmail = findViewById(R.id.btnSignUpEmail);
-        btnCheckOTP = findViewById(R.id.btnCheckOTP);
+
     }
 }
