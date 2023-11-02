@@ -1,8 +1,12 @@
 package com.example.login_form_2.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoaiSanPham {
     public long Id;
+    @SerializedName("tenloaisanpham")
     public String tenLoaisp;
+    @SerializedName("hinhanhloaisanpham")
     public String hinhAnhLoaisp;
 
     public LoaiSanPham(long id, String tenLoaisp, String hinhAnhLoaisp) {

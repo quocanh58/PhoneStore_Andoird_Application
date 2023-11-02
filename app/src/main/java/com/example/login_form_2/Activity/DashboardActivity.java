@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,12 @@ import com.android.volley.toolbox.Volley;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.LoaispAdapter;
 import com.example.login_form_2.model.LoaiSanPham;
+import com.example.login_form_2.model.category.CategoryReponse;
+import com.example.login_form_2.retrofit.APIClient;
+import com.example.login_form_2.retrofit_interface.CategoryServices;
+import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.CheckConnection;
+import com.example.login_form_2.utils.LoadingDialog;
 import com.example.login_form_2.utils.Server;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,7 +47,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class DashboardActivity extends AppCompatActivity {
+    Context that = this;
     private FirebaseAuth mAuth;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
@@ -95,39 +105,68 @@ public class DashboardActivity extends AppCompatActivity {
 //    }
 
     private void getDataLoaiSanPham() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.link, new Response.Listener<JSONArray>() {
+        LoadingDialog.setLoading(that,true);
+        Call<CategoryReponse> call = APIClient.getClient().create(CategoryServices.class).getAllLoaiSanPham();
+        call.enqueue(new Callback<CategoryReponse>() {
             @Override
-            public void onResponse(JSONArray response) {
-                if (response != null) {
-                    for (int i = 0; i < response.length(); i++) {
-                        try {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            result = true;
-                            message = "Lấy dữ liệu thành công";
-
-                            id = jsonObject.getInt("Id");
-                            tenloaisanpham = jsonObject.getString("tenloaisanpham");
-                            hinhanhloaisanpham = jsonObject.getString("hinhanhloaisanpham");
-                            mangLoaisp.add(new LoaiSanPham(id, tenloaisanpham, hinhanhloaisanpham));
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+            public void onResponse(Call<CategoryReponse> call, retrofit2.Response<CategoryReponse> response) {
+                LoadingDialog.setLoading(that,false);
+                if(response.isSuccessful() && response.body() != null){
+                    CategoryReponse reponse = response.body();
+                    System.out.println(reponse.toString());
+                    for(LoaiSanPham loai : reponse.data){
+                        mangLoaisp.add(loai);
                     }
-                    mangLoaisp.add(new LoaiSanPham(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
-                    mangLoaisp.add(new LoaiSanPham(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
-                    loaispAdapter.notifyDataSetChanged();
+
                 }
+                else{
+                    Alert.alert(that,"Lỗi get dữ liệu");
+                }
+
+                mangLoaisp.add(new LoaiSanPham(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
+                mangLoaisp.add(new LoaiSanPham(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
+                loaispAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                CheckConnection.showToast_Short(getApplicationContext(), error.toString());
+            public void onFailure(Call<CategoryReponse> call, Throwable t) {
+                LoadingDialog.setLoading(that,false);
+                t.printStackTrace();
             }
         });
-        //gọi lại dữ liệu
-        requestQueue.add(jsonArrayRequest);
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.link, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                if (response != null) {
+//                    for (int i = 0; i < response.length(); i++) {
+//                        try {
+//                            JSONObject jsonObject = response.getJSONObject(i);
+//                            result = true;
+//                            message = "Lấy dữ liệu thành công";
+//
+//                            id = jsonObject.getInt("Id");
+//                            tenloaisanpham = jsonObject.getString("tenloaisanpham");
+//                            hinhanhloaisanpham = jsonObject.getString("hinhanhloaisanpham");
+//                            mangLoaisp.add(new LoaiSanPham(id, tenloaisanpham, hinhanhloaisanpham));
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    mangLoaisp.add(new LoaiSanPham(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
+//                    mangLoaisp.add(new LoaiSanPham(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
+//                    loaispAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                CheckConnection.showToast_Short(getApplicationContext(), error.toString());
+//            }
+//        });
+//        //gọi lại dữ liệu
+//        requestQueue.add(jsonArrayRequest);
     }
 
     private void addEvent() {
