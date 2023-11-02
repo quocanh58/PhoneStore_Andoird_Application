@@ -24,8 +24,6 @@ public class SendOTPActivity extends AppCompatActivity {
     }
 
     private void addEvent() {
-//        String userName = edtUsername.getText().toString();
-//        String password = edtPassword.getText().toString();
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

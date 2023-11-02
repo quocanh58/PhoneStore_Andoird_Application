@@ -50,38 +50,37 @@
         android:textColorHint="#ffffff"
         android:textSize="20dp" />
 
-    <Button
-        android:id="@+id/btnLogin1"
-        android:layout_width="190dp"
-        android:layout_height="60dp"
-        android:text="Login"
-        android:textSize="17dp"
-        android:layout_marginBottom="10dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnSignUpEmail"
-            android:layout_width="145dp"
+            android:id="@+id/btnLogin1"
+            android:layout_width="165dp"
             android:layout_height="60dp"
-            android:text="Sign Up"
-            android:textSize="17dp"
-            android:layout_marginHorizontal="15dp"/>
+            android:layout_marginHorizontal="13dp"
+            android:text="Login Email"
+            android:textSize="17dp" />
+
         <Button
             android:id="@+id/btnCheckOTP"
-            android:layout_width="145dp"
+            android:layout_width="165dp"
             android:layout_height="60dp"
+            android:layout_marginHorizontal="13dp"
             android:text="Login OTP"
-            android:textSize="17dp"
-            android:layout_marginHorizontal="15dp"/>
+            android:textSize="17dp" />
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/btnSignUpEmail"
+        android:layout_width="145dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="Sign Up"
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/txtForgotPassword"
@@ -99,25 +98,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/gg"/>
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/fb"/>
+            android:src="@drawable/gg" />
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/tt"/>
+            android:src="@drawable/fb" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/tt" />
     </LinearLayout>
-
 
 
 </LinearLayout>

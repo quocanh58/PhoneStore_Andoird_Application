@@ -24,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.LoaispAdapter;
@@ -32,6 +33,7 @@ import com.example.login_form_2.utils.CheckConnection;
 import com.example.login_form_2.utils.Server;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -52,6 +54,9 @@ public class DashboardActivity extends AppCompatActivity {
     ArrayList<LoaiSanPham> mangLoaisp;
     LoaispAdapter loaispAdapter;
     int id;
+
+    Boolean result = true;
+    String message = "";
     String tenloaisanpham = "";
     String hinhanhloaisanpham = "";
 
@@ -72,6 +77,23 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
+//    private void getMenuSidebar() {
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Server.link, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                if (response != null) {
+//                    for (int i = 0; i < response.length(); i++) {
+//                        try {
+//                            JsonObject jsonObject = response.getJSONObject();
+//
+//                        }
+//                    }
+//                }
+//            }
+//        })
+//    }
+
     private void getDataLoaiSanPham() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.link, new Response.Listener<JSONArray>() {
@@ -81,17 +103,20 @@ public class DashboardActivity extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject jsonObject = response.getJSONObject(i);
+                            result = true;
+                            message = "Lấy dữ liệu thành công";
+
                             id = jsonObject.getInt("Id");
                             tenloaisanpham = jsonObject.getString("tenloaisanpham");
                             hinhanhloaisanpham = jsonObject.getString("hinhanhloaisanpham");
-                            mangLoaisp.add( new LoaiSanPham(id, tenloaisanpham, hinhanhloaisanpham));
+                            mangLoaisp.add(new LoaiSanPham(id, tenloaisanpham, hinhanhloaisanpham));
 
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                    mangLoaisp.add( new LoaiSanPham(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
-                    mangLoaisp.add( new LoaiSanPham(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
+                    mangLoaisp.add(new LoaiSanPham(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
+                    mangLoaisp.add(new LoaiSanPham(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
                     loaispAdapter.notifyDataSetChanged();
                 }
             }
@@ -192,7 +217,7 @@ public class DashboardActivity extends AppCompatActivity {
         txtNew = findViewById(R.id.txtNew);
         btnSignOut = findViewById(R.id.btnSignOut);
         mangLoaisp = new ArrayList<>();
-        mangLoaisp.add( new LoaiSanPham(0, "Trang chính", "https://e7.pngegg.com/pngimages/526/91/png-clipart-website-home-page-home-inspection-house-size-icon-homepage-miscellaneous-blue-thumbnail.png"));
+        mangLoaisp.add(new LoaiSanPham(0, "Trang chính", "https://e7.pngegg.com/pngimages/526/91/png-clipart-website-home-page-home-inspection-house-size-icon-homepage-miscellaneous-blue-thumbnail.png"));
 //        mangLoaisp.add(1, new Loaisp(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
 //        mangLoaisp.add(2, new Loaisp(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
         loaispAdapter = new LoaispAdapter(mangLoaisp, getApplicationContext());
