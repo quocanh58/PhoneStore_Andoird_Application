@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background5"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".Activity.MainActivity">
+
+    <TextView
+        android:id="@+id/txtTile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="35dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center"
+        android:text="Login"
+        android:textColor="#9F03A9F4"
+        android:textSize="55sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:drawableLeft="@drawable/baseline_person_outline_24"
+        android:drawablePadding="10dp"
+        android:hint="Email"
+        android:text="at050801@gmail.com"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="30dp"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="10dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnLogin1"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:text="Login"
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/btnSignUpEmail"
+            android:layout_width="145dp"
+            android:layout_height="60dp"
+            android:text="Sign Up"
+            android:textSize="17dp"
+            android:layout_marginHorizontal="15dp"/>
+        <Button
+            android:id="@+id/btnCheckOTP"
+            android:layout_width="145dp"
+            android:layout_height="60dp"
+            android:text="Login OTP"
+            android:textSize="17dp"
+            android:layout_marginHorizontal="15dp"/>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/txtForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="Don't remember password ?"
+        android:textColor="#90A4A8"
+        android:textSize="20dp"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/gg"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/fb"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/tt"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background5"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".Activity.MainActivity">
+
+    <TextView
+        android:id="@+id/txtTile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="85dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center"
+        android:text="Verify Email"
+        android:textColor="#9F03A9F4"
+        android:textSize="55sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="10dp"
+        android:hint="Enter Email"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20dp"
+        android:text="at050801@gmail.com"/>
+
+    <EditText
+        android:id="@+id/edtPassword2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="100dp"
+        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawablePadding="10dp"
+        android:hint="Enter Password"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btnSendEmail"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:text="Send Email"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnLoginEmail"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:text="Back login"
+        android:textSize="20dp"
+        />
+
+
+</LinearLayout>
