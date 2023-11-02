@@ -1,11 +1,11 @@
 package com.example.login_form_2.model;
 
-public class Loaisp {
+public class LoaiSanPham {
     public long Id;
     public String tenLoaisp;
     public String hinhAnhLoaisp;
 
-    public Loaisp(long id, String tenLoaisp, String hinhAnhLoaisp) {
+    public LoaiSanPham(long id, String tenLoaisp, String hinhAnhLoaisp) {
         Id = id;
         this.tenLoaisp = tenLoaisp;
         this.hinhAnhLoaisp = hinhAnhLoaisp;

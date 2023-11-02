@@ -9,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.login_form_2.R;
-import com.example.login_form_2.model.Loaisp;
+import com.example.login_form_2.model.LoaiSanPham;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class LoaispAdapter extends BaseAdapter {
-    ArrayList<Loaisp> loaispsArr;
+    ArrayList<LoaiSanPham> loaispsArr;
     Context context;
 
-    public LoaispAdapter(ArrayList<Loaisp> loaispsArr, Context context) {
+    public LoaispAdapter(ArrayList<LoaiSanPham> loaispsArr, Context context) {
         this.loaispsArr = loaispsArr;
         this.context = context;
     }
@@ -61,7 +61,7 @@ public class LoaispAdapter extends BaseAdapter {
         }else { // gán những id đã có dữ liệu ánh xạ
             viewHolder = (ViewHolder) view.getTag();
         }
-        Loaisp loaisp = (Loaisp) getItem(i);
+        LoaiSanPham loaisp = (LoaiSanPham) getItem(i);
         viewHolder.txtTenLoaiSp.setText(loaisp.getTenLoaisp());
         Picasso.get().load(loaisp.getHinhAnhLoaisp())
                 .placeholder(R.drawable.loadsuccess)
