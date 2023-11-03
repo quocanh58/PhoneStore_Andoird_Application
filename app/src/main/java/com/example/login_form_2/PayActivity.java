@@ -101,7 +101,11 @@ public class PayActivity extends AppCompatActivity {
                         t.printStackTrace();
                     }
                 });
+
                 Alert.alert(that,request.toString());
+                System.out.println(request.toString());
+                payAdapter.clear();
+                payAdapter.notifyDataSetChanged();
             }
         });
     }

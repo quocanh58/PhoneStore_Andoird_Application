@@ -12,12 +12,11 @@
 
         <ImageView
             android:id="@+id/imgPay"
+            android:layout_width="89dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:padding="10dp"
-            android:src="@drawable/loadfail"
-            android:layout_width="80dp"
-            android:layout_height="80dp">
-        </ImageView>
+            android:src="@drawable/loadfail"></ImageView>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"

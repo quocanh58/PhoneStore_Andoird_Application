@@ -28,7 +28,7 @@ public class CartActivity extends AppCompatActivity  {
     CheckBox checkAllCart;
     static TextView totalPrice;
     Button btnMuaHang;
-    public  static  CartAdapter cartAdapter;
+    public static CartAdapter cartAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +76,8 @@ public class CartActivity extends AppCompatActivity  {
                 System.out.println(dataCartsSeleted.toString());
                 Intent intent = new Intent(that,PayActivity.class);
                 startActivity(intent);
+
+
             }
         });
     }
