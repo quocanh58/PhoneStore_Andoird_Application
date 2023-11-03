@@ -17,13 +17,13 @@ import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.Function;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity  {
     Context that = this;
-    ListView lvCart;
+    public  static  ListView lvCart;
     CheckBox checkAllCart;
     static TextView totalPrice;
     Button btnMuaHang;
-    private CartAdapter cartAdapter;
+    public  static  CartAdapter cartAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,10 @@ public class CartActivity extends AppCompatActivity {
     public static void updateTotal(double price){
         totalPrice.setText(Function.formatCurrency(price));
     }
-
+    public static void UpdateListView(){
+        CartActivity.cartAdapter = new CartAdapter(lvCart.getContext(), R.layout.item_card, GlobalStore.currentDataCart);
+        CartActivity.lvCart.setAdapter(  CartActivity.cartAdapter);
+    }
     private void addControl() {
         lvCart = findViewById(R.id.lvCart);
         checkAllCart = findViewById(R.id.btnCheckAllCart);
@@ -67,7 +70,11 @@ public class CartActivity extends AppCompatActivity {
         btnMuaHang = findViewById(R.id.btnMuaHang);
         // thêm cart
         cartAdapter = new CartAdapter(that, R.layout.item_card, GlobalStore.currentDataCart);
+
         lvCart.setAdapter(cartAdapter);
+
         totalPrice.setText(Function.formatCurrency(CartAdapter.getTotalPriceCart()));
     }
+
+
 }

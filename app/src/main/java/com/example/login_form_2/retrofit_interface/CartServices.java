@@ -16,5 +16,8 @@ public interface CartServices {
     Call<GetCartReponse> getAllCartOfUser(@Query("userID") long userID);
 
     @POST("cart.php")
-    Call<GetCartReponse> addProductToCart (@Body CartRequest user);
+    Call<GetCartReponse> addProductToCart (@Body CartRequest cart);
+
+    @POST("cart.php")
+    Call<GetCartReponse> deleteProductFromCart (@Body CartRequest cart);
 }

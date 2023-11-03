@@ -74,23 +74,33 @@ public class LoginActivity extends AppCompatActivity {
                                 call.enqueue(new Callback<LoginReponse>() {
                                     @Override
                                     public void onResponse(Call<LoginReponse> call, Response<LoginReponse> response) {
+
                                         LoadingDialog.setLoading(that, false);
-                                        LoginReponse reponse = response.body();
-                                        if (reponse.result == 1) {
-                                            Alert.confirmLogin(that, "Đăng nhập", reponse.message, new Alert.OnDialogButtonClickListener() {
-                                                @Override
-                                                public void onPositiveButtonClick() {
-                                                    GlobalStore.currentUser = reponse.user;
-                                                    Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
-                                                    startActivity(intents);
-                                                    finish();
-                                                }
+                                        if(response.isSuccessful() ){
+                                            LoginReponse reponse = response.body();
+                                            System.out.println(reponse);
+                                            if (reponse != null && reponse.result == 1) {
+                                                Alert.confirmLogin(that, "Đăng nhập", reponse.message, new Alert.OnDialogButtonClickListener() {
+                                                    @Override
+                                                    public void onPositiveButtonClick() {
+                                                        GlobalStore.currentUser = reponse.user;
+                                                        Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                        startActivity(intents);
+                                                        finish();
+                                                    }
 
-                                                @Override
-                                                public void onNegativeButtonClick() {
+                                                    @Override
+                                                    public void onNegativeButtonClick() {
 
-                                                }
-                                            });
+                                                    }
+                                                });
+                                            }
+                                            else{
+                                                Alert.alert(that,"Lỗi đăng nhập");
+                                            }
+                                        }
+                                        else{
+                                            Alert.alert(that,"Server đang bảo trì");
                                         }
                                     }
 

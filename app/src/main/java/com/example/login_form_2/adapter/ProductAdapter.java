@@ -80,6 +80,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 cartRequest.type = "insert";
                 cartRequest.userID = Integer.parseInt(GlobalStore.currentUser.id);
                 cartRequest.productID = Function.getIntNumber(product.id);
+                cartRequest.quantity = 1;
 
                 Call<GetCartReponse> call = APIClient.getClient().create(CartServices.class).addProductToCart(cartRequest);
                 call.enqueue(new Callback<GetCartReponse>() {
