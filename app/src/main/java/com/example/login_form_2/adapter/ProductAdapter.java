@@ -3,6 +3,7 @@ package com.example.login_form_2.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.login_form_2.R;
 import com.example.login_form_2.model.Product;
+import com.example.login_form_2.utils.Alert;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,6 +59,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 onItemClickListener.onItemClick(position);
             }
         });
+        holder.btnAddtoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Alert.alert(v.getContext(), "Thêm vào giỏ hàng","Chức năng đang phát trieern " + product.id);
+            }
+        });
     }
 
     @Override
@@ -71,7 +79,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         //        ...
         TextView txtTitle, txtGia;
         ImageView imgAnhSanPham;
-
+        Button btnAddtoCart;
         public ViewHolder(View itemView) {
             super(itemView);
             // Ánh xạ các thành phần giao diện vào biến
@@ -81,7 +89,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             txtGia = itemView.findViewById(R.id.txtGiaProduct);
             txtTitle = itemView.findViewById(R.id.txtTitleProduct);
             imgAnhSanPham = itemView.findViewById(R.id.imgProduct);
-
+            btnAddtoCart = itemView.findViewById(R.id.addProductToCard);
         }
     }
 }

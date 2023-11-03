@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@color/white"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -27,7 +27,9 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="17dp"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textStyle="bold">
 
         </TextView>
@@ -43,7 +45,7 @@
                 android:layout_weight="0.5"
                 android:text="Giá"
                 android:textColor="#F10909"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:textStyle="bold"></TextView>
 
             <TextView
@@ -57,6 +59,17 @@
                 android:textStyle="bold"></TextView>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/addProductToCard"
+            android:textColor="@color/white"
+            android:backgroundTint="#5DA331"
+            android:layout_gravity="center"
+            android:text="Thêm vào giỏ hàng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Button>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

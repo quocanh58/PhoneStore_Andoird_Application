@@ -181,8 +181,13 @@ public class DashboardActivity extends AppCompatActivity {
             dialog.show();
         });
         listViewDashboard.setOnItemClickListener((parent, view, position, id) -> {
+            if(position == 0){
+                getDataSanPham();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return;
+            }
             LoaiSanPham loai = mangLoaisp.get(position);
-            if(loai.Id != 0){
+            if(position != 0 && position != mangLoaisp.size() -1 && position != mangLoaisp.size() -2){
                 LoadingDialog.setLoading(that,true);
                 Call<GetProductReponse> call = APIClient.getClient().create(ProductServices.class).getSanPhamByCategoryID(loai.Id);
                 call.enqueue(new Callback<GetProductReponse>() {
