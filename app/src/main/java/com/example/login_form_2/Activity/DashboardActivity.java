@@ -24,16 +24,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.example.login_form_2.CartActivity;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.LoaispAdapter;
 import com.example.login_form_2.adapter.ProductAdapter;
 import com.example.login_form_2.model.LoaiSanPham;
 import com.example.login_form_2.model.Product;
+import com.example.login_form_2.model.cart.GetCartReponse;
 import com.example.login_form_2.model.category.GetCategoryReponse;
 import com.example.login_form_2.model.product.GetProductReponse;
 import com.example.login_form_2.retrofit.APIClient;
+import com.example.login_form_2.retrofit_interface.CartServices;
 import com.example.login_form_2.retrofit_interface.CategoryServices;
 import com.example.login_form_2.retrofit_interface.ProductServices;
+import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.CheckConnection;
 import com.example.login_form_2.utils.LoadingDialog;
@@ -79,12 +83,38 @@ public class DashboardActivity extends AppCompatActivity {
             addEventViewFlipper();
             getDataLoaiSanPham();
             getDataSanPham();
+            getDataCart(Long.parseLong(GlobalStore.currentUser.id));
             //addTitleDashboard();
             addEvent();
         } else {
             CheckConnection.showToast_Short(getApplicationContext(), "Bạn hãy kiếm tra lại kết nối.");
             finish();
         }
+    }
+
+    private void getDataCart(long id) {
+        LoadingDialog.setLoading(that,true);
+        Call<GetCartReponse> call = APIClient.getClient().create(CartServices.class).getAllCartOfUser(id);
+        call.enqueue(new Callback<GetCartReponse>() {
+            @Override
+            public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
+                    LoadingDialog.setLoading(that,false);
+                    if(response.isSuccessful() && response.body() != null){
+                        GlobalStore.currentDataCart = response.body().data;
+                        System.out.println(GlobalStore.currentDataCart);
+                    }
+                    else{
+                        Alert.alert(that,"Lỗi không get được cart onResponse");
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<GetCartReponse> call, Throwable t) {
+                LoadingDialog.setLoading(that,false);
+                t.printStackTrace();
+
+            }
+        });
     }
 
     private void getDataSanPham() {
@@ -288,7 +318,8 @@ public class DashboardActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_right_button) {
-            Alert.alert(that,"Giỏ hàng đang được cập nhật");
+            Intent intent = new Intent(that, CartActivity.class);
+            startActivity(intent);
             return true;
         }
 

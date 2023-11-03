@@ -12,10 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.login_form_2.R;
 import com.example.login_form_2.model.Product;
+import com.example.login_form_2.model.cart.CartRequest;
+import com.example.login_form_2.model.cart.GetCartReponse;
+import com.example.login_form_2.retrofit.APIClient;
+import com.example.login_form_2.retrofit_interface.CartServices;
+import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
+import com.example.login_form_2.utils.Function;
+import com.example.login_form_2.utils.LoadingDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import okhttp3.internal.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     public interface OnItemClickListener {
@@ -62,7 +74,35 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.btnAddtoCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alert.alert(v.getContext(), "Thêm vào giỏ hàng","Chức năng đang phát trieern " + product.id);
+                LoadingDialog.setLoading(v.getContext(),true);
+                CartRequest cartRequest = new CartRequest();
+
+                cartRequest.type = "insert";
+                cartRequest.userID = Integer.parseInt(GlobalStore.currentUser.id);
+                cartRequest.productID = Function.getIntNumber(product.id);
+
+                Call<GetCartReponse> call = APIClient.getClient().create(CartServices.class).addProductToCart(cartRequest);
+                call.enqueue(new Callback<GetCartReponse>() {
+                    @Override
+                    public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
+                        LoadingDialog.setLoading(v.getContext(),false);
+                        if(response.isSuccessful() && response.body() != null && response.body().result == 1){
+                            GlobalStore.currentDataCart = response.body().data;
+                            Alert.alert(v.getContext(), "Giỏ hàng", "Đã thêm sản phaarm vào giỏ hàng thành côgn");
+                        }
+                        else{
+                            Alert.alert(v.getContext(), "Đã có lỗi xẩy ra khi thêm cart");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetCartReponse> call, Throwable t) {
+                        LoadingDialog.setLoading(v.getContext(),false);
+                        t.printStackTrace();
+
+                    }
+                });
+               // Alert.alert(v.getContext(), "Thêm vào giỏ hàng","Chức năng đang phát trieern " + product.id);
             }
         });
     }

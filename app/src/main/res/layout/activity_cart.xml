@@ -5,9 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
     tools:context=".CartActivity">
 
     <ScrollView
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:id="@+id/ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,17 +19,22 @@
         >
 
         <LinearLayout
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ListView
+                android:id="@+id/lvCart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </ListView>
+                android:layout_height="568dp"></ListView>
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +69,7 @@
 
             </TextView>
             <TextView
+                android:id="@+id/txtTotalPriceCart"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:textColor="#B10505"
@@ -73,6 +83,7 @@
             </TextView>
         </LinearLayout>
         <Button
+            android:id="@+id/btnMuaHang"
             android:textColor="@color/white"
             android:textAlignment="center"
             android:layout_weight="1"

@@ -35,4 +35,14 @@ public class Function {
         return false;
     }
 
+    public  static int getIntNumber(String s){
+        try{
+            int a = Integer.parseInt(s);
+            return a;
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
+
 }
