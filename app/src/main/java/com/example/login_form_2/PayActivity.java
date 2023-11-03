@@ -120,21 +120,15 @@ public class PayActivity extends AppCompatActivity {
                             }
                             dataCarts.clear();
                             payAdapter.notifyDataSetChanged();
-
                         }
                     }
-
                     @Override
                     public void onFailure(Call<OrderReponse> call, Throwable t) {
                         LoadingDialog.setLoading(that, false);
                         t.printStackTrace();
                     }
                 });
-
-                Alert.alert(that,request.toString());
                 System.out.println(request.toString());
-                payAdapter.clear();
-                payAdapter.notifyDataSetChanged();
             }
         });
     }

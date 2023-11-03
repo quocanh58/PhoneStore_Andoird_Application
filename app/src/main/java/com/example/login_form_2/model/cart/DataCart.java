@@ -10,7 +10,6 @@ public class DataCart {
     public String quantity;
     public String userID;
     public Product product;
-
     public boolean isChecked = false;
 
     @NonNull
