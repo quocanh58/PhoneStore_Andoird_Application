@@ -16,6 +16,7 @@ import com.example.login_form_2.model.login.LoginReponse;
 import com.example.login_form_2.model.login.LoginRequest;
 import com.example.login_form_2.retrofit.APIClient;
 import com.example.login_form_2.retrofit_interface.LoginServices;
+import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.LoadingDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Alert.confirmLogin(that, "Đăng nhập", reponse.message, new Alert.OnDialogButtonClickListener() {
                                                 @Override
                                                 public void onPositiveButtonClick() {
+                                                    GlobalStore.currentUser = reponse.user;
                                                     Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
                                                     startActivity(intents);
                                                     finish();

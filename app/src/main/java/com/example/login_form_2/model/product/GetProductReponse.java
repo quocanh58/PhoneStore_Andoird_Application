@@ -1,16 +1,16 @@
-package com.example.login_form_2.model.category;
+package com.example.login_form_2.model.product;
 
 import androidx.annotation.NonNull;
 
-import com.example.login_form_2.model.LoaiSanPham;
+import com.example.login_form_2.model.Product;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class CategoryReponse {
+public class GetProductReponse {
     public int result;
     public String message;
-    public ArrayList<LoaiSanPham> data;
+    public ArrayList<Product> data;
 
     @NonNull
     @Override

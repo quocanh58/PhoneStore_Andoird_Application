@@ -1,5 +1,8 @@
 package com.example.login_form_2.model;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 public class LoaiSanPham {
@@ -37,5 +40,11 @@ public class LoaiSanPham {
 
     public void setHinhAnhLoaisp(String hinhAnhLoaisp) {
         this.hinhAnhLoaisp = hinhAnhLoaisp;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }

@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_right_button"
+        android:icon="@drawable/icons8_cart_64"
+        android:title="Your Title"
+        app:showAsAction="always" />
+</menu>
