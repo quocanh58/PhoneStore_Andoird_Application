@@ -49,8 +49,8 @@ public class CartActivity extends AppCompatActivity  {
             }
         });
         checkAllCart.setOnClickListener(v -> {
-
             double sum = 0;
+
             for (DataCart dataCart : GlobalStore.currentDataCart) {
                 dataCart.isChecked = checkAllCart.isChecked();
                 if (dataCart.isChecked) {

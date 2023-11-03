@@ -85,16 +85,17 @@ public class PayActivity extends AppCompatActivity {
                     Order order = new Order();
                     order.dongia = Function.getDoubleNumber(dataCart.product.giasanpham);
                     order.soluong = Integer.parseInt(dataCart.quantity);
-                    order.idsanpham = Integer.parseInt(dataCart.id);
+                    order.idsanpham = Integer.parseInt(dataCart.product.id);
                     request.data.add(order);
                 }
+
                 Call<OrderReponse> call = APIClient.getClient().create(OrderServices.class).addOrder(request);
                 call.enqueue(new Callback<OrderReponse>() {
                     @Override
                     public void onResponse(Call<OrderReponse> call, Response<OrderReponse> response) {
                         LoadingDialog.setLoading(that, false);
                         if(response.code() == 200 && response.isSuccessful() && response.body() != null){
-                            Alert.alert(that,response.body().message);
+                            Alert.alert(that, response.body().message);
 
                             for(DataCart dataCart : dataCarts){
                                 CartRequest request = new CartRequest();

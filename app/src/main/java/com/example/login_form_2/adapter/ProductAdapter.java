@@ -91,7 +91,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         Alert.alert(v.getContext(), "Giỏ hàng", response.body().message);
                     }
                     else{
-                        Alert.alert(v.getContext(), "Đã có lỗi xẩy ra khi thêm cart");
+                        Alert.alert(v.getContext(), response.body().message);
                     }
                 }
 

@@ -30,17 +30,14 @@ public class LoaispAdapter extends BaseAdapter {
         }
         return loaispsArr.size();
     }
-
     @Override
     public Object getItem(int i) {
         return loaispsArr.get(i);
     }
-
     @Override
     public long getItemId(int i) {
         return i;
     }
-
     public class ViewHolder {
         TextView txtTenLoaiSp;
         ImageView imgLoaiSanPham;
