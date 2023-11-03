@@ -2,6 +2,7 @@ package com.example.login_form_2.model;
 
 import androidx.annotation.NonNull;
 
+import com.example.login_form_2.store.GlobalStore;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -42,6 +43,15 @@ public class LoaiSanPham {
         this.hinhAnhLoaisp = hinhAnhLoaisp;
     }
 
+
+    public static String getNameofCategory(long id){
+        for(LoaiSanPham loaiSanPham : GlobalStore.currentArrLoaiSanPham){
+            if (loaiSanPham.Id == id){
+                return loaiSanPham.tenLoaisp;
+            }
+        }
+        return "";
+    }
     @NonNull
     @Override
     public String toString() {

@@ -79,7 +79,7 @@
                 android:padding="10dp"
                 android:layout_gravity="right"
                 android:textAlignment="textEnd"
-                android:text="0 vnd"
+                android:text="0 VNĐ"
                 >
             </TextView>
         </LinearLayout>

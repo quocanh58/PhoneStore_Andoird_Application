@@ -3,6 +3,7 @@ package com.example.login_form_2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +18,11 @@ import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.Function;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class CartActivity extends AppCompatActivity  {
+    public static HashMap<DataCart,String> dataCartsSeleted = new HashMap<>();
     Context that = this;
     public  static  ListView lvCart;
     CheckBox checkAllCart;
@@ -44,15 +49,34 @@ public class CartActivity extends AppCompatActivity  {
             }
         });
         checkAllCart.setOnClickListener(v -> {
+
             double sum = 0;
             for (DataCart dataCart : GlobalStore.currentDataCart) {
                 dataCart.isChecked = checkAllCart.isChecked();
                 if (dataCart.isChecked) {
                     sum += Function.getIntNumber(dataCart.quantity) * Function.getDoubleNumber(dataCart.product.giasanpham);
+
                 }
             }
             cartAdapter.notifyDataSetChanged();
             totalPrice.setText(Function.formatCurrency(sum));
+        });
+        btnMuaHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(totalPrice.getText().toString().trim().equals("0 VND")){
+                    return;
+                }
+                CartActivity.dataCartsSeleted.clear();
+                for(DataCart dataCart : GlobalStore.currentDataCart){
+                    if(dataCart.isChecked){
+                        dataCartsSeleted.put(dataCart,"");
+                    }
+                }
+                System.out.println(dataCartsSeleted.toString());
+                Intent intent = new Intent(that,PayActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
@@ -65,15 +89,16 @@ public class CartActivity extends AppCompatActivity  {
     }
     private void addControl() {
         lvCart = findViewById(R.id.lvCart);
+        cartAdapter = new CartAdapter(that, R.layout.item_card, GlobalStore.currentDataCart);
+        lvCart.setAdapter(cartAdapter);
         checkAllCart = findViewById(R.id.btnCheckAllCart);
         totalPrice = findViewById(R.id.txtTotalPriceCart);
         btnMuaHang = findViewById(R.id.btnMuaHang);
-        // thêm cart
-        cartAdapter = new CartAdapter(that, R.layout.item_card, GlobalStore.currentDataCart);
-
-        lvCart.setAdapter(cartAdapter);
-
         totalPrice.setText(Function.formatCurrency(CartAdapter.getTotalPriceCart()));
+        // thêm cart
+
+
+
     }
 
 

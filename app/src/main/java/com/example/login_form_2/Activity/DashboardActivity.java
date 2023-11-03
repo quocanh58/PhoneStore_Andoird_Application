@@ -178,6 +178,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                 mangLoaisp.add(new LoaiSanPham(0, "Liên hệ", "https://toppng.com/uploads/preview/iphone-telephone-logo-computer-icons-red-call-icon-11553520215xtqxhnnj6r.png"));
                 mangLoaisp.add(new LoaiSanPham(0, "Thông tin", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Messagebox_info.svg/1200px-Messagebox_info.svg.png"));
+                GlobalStore.currentArrLoaiSanPham = mangLoaisp;
                 loaispAdapter.notifyDataSetChanged();
             }
 

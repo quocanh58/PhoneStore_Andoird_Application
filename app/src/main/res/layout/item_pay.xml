@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgCart"
+            android:id="@+id/imgPay"
             android:layout_gravity="center"
             android:padding="10dp"
             android:src="@drawable/loadfail"
@@ -23,7 +23,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/txtTileCart"
+                android:id="@+id/txtTilePay"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textSize="17dp"
@@ -35,7 +35,7 @@
 
             </TextView>
             <TextView
-                android:id="@+id/txtGiaCart"
+                android:id="@+id/txtLoaiSPPay"
                 android:padding="5dp"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -54,7 +54,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/txtSlCart"
+                    android:id="@+id/txtPricePay"
 
                     android:padding="5dp"
                     android:maxLines="1"

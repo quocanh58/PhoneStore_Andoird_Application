@@ -87,16 +87,23 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
         // sự kiện
         if(dataCart.isChecked){
             checkcart.setChecked(true);
+            CartActivity.dataCartsSeleted.put(dataCart,"");
         }
         else{
             checkcart.setChecked(false);
+            CartActivity.dataCartsSeleted.remove(dataCart);
         }
         checkcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dataCart.isChecked = checkcart.isChecked();
                 CartActivity.updateTotal(getTotalPriceCart());
-
+                if(!checkcart.isChecked()){
+                    CartActivity.dataCartsSeleted.remove(dataCart);
+                }
+                else{
+                    CartActivity.dataCartsSeleted.put(dataCart,"");
+                }
             }
         });
 
@@ -138,6 +145,7 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
                 if(quantity < 0){
                     return;
                 }
+
                 CartRequest cartRequest = new CartRequest();
                 cartRequest.type = "update";
                 cartRequest.cartID = Integer.parseInt(dataCart.id);
@@ -170,6 +178,7 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
                 if(quantity < 0){
                     return;
                 }
+
                 CartRequest cartRequest = new CartRequest();
                 cartRequest.type = "update";
                 cartRequest.cartID = Integer.parseInt(dataCart.id);
