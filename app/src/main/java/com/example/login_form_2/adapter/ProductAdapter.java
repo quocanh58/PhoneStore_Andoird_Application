@@ -89,7 +89,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         LoadingDialog.setLoading(v.getContext(),false);
                         if(response.isSuccessful() && response.body() != null && response.body().result == 1){
                             GlobalStore.currentDataCart = response.body().data;
-                            Alert.alert(v.getContext(), "Giỏ hàng", "Đã thêm sản phaarm vào giỏ hàng thành côgn");
+                            Alert.alert(v.getContext(), "Giỏ hàng", response.body().message);
                         }
                         else{
                             Alert.alert(v.getContext(), "Đã có lỗi xẩy ra khi thêm cart");

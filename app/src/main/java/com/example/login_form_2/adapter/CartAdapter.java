@@ -147,12 +147,12 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
                 call.enqueue(new Callback<GetCartReponse>() {
                     @Override
                     public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
-                        if(response.code() == 200 && response.isSuccessful() && response.body() != null){
+                        if(response.body().result == 1){
                             GlobalStore.currentDataCart = response.body().data;
                             CartActivity.UpdateListView();
                         }
                         else{
-                            Alert.alert(context,"Lỗi");
+                            Alert.alert(getContext(),response.body().message);
                         }
                     }
 
@@ -180,8 +180,13 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
                     @Override
                     public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
                         if(response.code() == 200 && response.isSuccessful() && response.body() != null){
-                            GlobalStore.currentDataCart = response.body().data;
-                            CartActivity.UpdateListView();
+                            if(response.body().result == 1){
+                                GlobalStore.currentDataCart = response.body().data;
+                                CartActivity.UpdateListView();
+                            }
+                            else{
+                                Alert.alert(getContext(),response.body().message);
+                            }
                         }
                         else{
                             Alert.alert(context,"Lỗi");
