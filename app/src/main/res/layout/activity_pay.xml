@@ -70,7 +70,7 @@
             <ListView
                 android:id="@+id/lvPay"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
+                android:layout_height="259dp"></ListView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
