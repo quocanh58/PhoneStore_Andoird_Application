@@ -12,13 +12,23 @@ import android.widget.TextView;
 import com.example.login_form_2.adapter.CartAdapter;
 import com.example.login_form_2.adapter.PayAdapter;
 import com.example.login_form_2.model.cart.DataCart;
+import com.example.login_form_2.model.order.Order;
+import com.example.login_form_2.model.order.OrderReponse;
+import com.example.login_form_2.model.order.OrderRequest;
+import com.example.login_form_2.retrofit.APIClient;
+import com.example.login_form_2.retrofit_interface.OrderServices;
 import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.Function;
+import com.example.login_form_2.utils.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PayActivity extends AppCompatActivity {
     TextView txtPayInfo,txtPayAddress,txtTotalPricePay;
@@ -26,6 +36,7 @@ public class PayActivity extends AppCompatActivity {
     public static ListView lvPay;
     public static PayAdapter payAdapter;
     Button btnDatHang;
+    private ArrayList<DataCart> dataCarts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +45,13 @@ public class PayActivity extends AppCompatActivity {
         addControl();
         addEvent();
     }
-
+    long sum = 0;
 
 
     private void addControl() {
-        long sum = 0;
+
         lvPay = findViewById(R.id.lvPay);
-        ArrayList<DataCart> dataCarts = new ArrayList<>();
+        dataCarts = new ArrayList<>();
         for (Map.Entry<DataCart, String> entry : CartActivity.dataCartsSeleted.entrySet()) {
             dataCarts.add(entry.getKey());
             sum += Function.getLongNumber(entry.getKey().product.giasanpham) * Function.getLongNumber( entry.getKey().quantity);
@@ -61,7 +72,36 @@ public class PayActivity extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alert.alert(that,"Chức năng đang phát triển");
+                LoadingDialog.setLoading(that, true);
+                OrderRequest request = new OrderRequest();
+                request.time = System.currentTimeMillis();
+                request.totalPrice = sum;
+                request.UserID = Integer.parseInt(GlobalStore.currentUser.id);
+                request.data = new ArrayList<>();
+                for(DataCart dataCart : dataCarts){
+                    Order order = new Order();
+                    order.dongia = Function.getDoubleNumber(dataCart.product.giasanpham);
+                    order.soluong = Integer.parseInt(dataCart.quantity);
+                    order.idsanpham = Integer.parseInt(dataCart.id);
+                    request.data.add(order);
+                }
+                Call<OrderReponse> call = APIClient.getClient().create(OrderServices.class).addOrder(request);
+                call.enqueue(new Callback<OrderReponse>() {
+                    @Override
+                    public void onResponse(Call<OrderReponse> call, Response<OrderReponse> response) {
+                        LoadingDialog.setLoading(that, false);
+                        if(response.code() == 200 && response.isSuccessful() && response.body() != null){
+                            Alert.alert(that,response.body().message);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrderReponse> call, Throwable t) {
+                        LoadingDialog.setLoading(that, false);
+                        t.printStackTrace();
+                    }
+                });
+                Alert.alert(that,request.toString());
             }
         });
     }
