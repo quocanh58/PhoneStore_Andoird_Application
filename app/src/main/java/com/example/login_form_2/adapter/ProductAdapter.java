@@ -61,6 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         holder.txtTitle.setText(product.tensanpham);
         holder.txtGia.setText(product.giasanpham);
+        holder.txtSLconLai.setText(Function.formatCurrency(Function.getDoubleNumber(product.giasanpham)));
         String imageUrl = product.hinhanhsanpham; // Đường dẫn đến hình ảnh
         Picasso.get()
                 .load(imageUrl)
@@ -71,40 +72,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 onItemClickListener.onItemClick(position);
             }
         });
-        holder.btnAddtoCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoadingDialog.setLoading(v.getContext(),true);
-                CartRequest cartRequest = new CartRequest();
+        holder.btnAddtoCart.setOnClickListener(v -> {
+            LoadingDialog.setLoading(v.getContext(),true);
+            CartRequest cartRequest = new CartRequest();
 
-                cartRequest.type = "insert";
-                cartRequest.userID = Integer.parseInt(GlobalStore.currentUser.id);
-                cartRequest.productID = Function.getIntNumber(product.id);
-                cartRequest.quantity = 1;
+            cartRequest.type = "insert";
+            cartRequest.userID = Integer.parseInt(GlobalStore.currentUser.id);
+            cartRequest.productID = Function.getIntNumber(product.id);
+            cartRequest.quantity = 1;
 
-                Call<GetCartReponse> call = APIClient.getClient().create(CartServices.class).addProductToCart(cartRequest);
-                call.enqueue(new Callback<GetCartReponse>() {
-                    @Override
-                    public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
-                        LoadingDialog.setLoading(v.getContext(),false);
-                        if(response.isSuccessful() && response.body() != null && response.body().result == 1){
-                            GlobalStore.currentDataCart = response.body().data;
-                            Alert.alert(v.getContext(), "Giỏ hàng", response.body().message);
-                        }
-                        else{
-                            Alert.alert(v.getContext(), "Đã có lỗi xẩy ra khi thêm cart");
-                        }
+            Call<GetCartReponse> call = APIClient.getClient().create(CartServices.class).addProductToCart(cartRequest);
+            call.enqueue(new Callback<GetCartReponse>() {
+                @Override
+                public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
+                    LoadingDialog.setLoading(v.getContext(),false);
+                    if(response.isSuccessful() && response.body() != null && response.body().result == 1){
+                        GlobalStore.currentDataCart = response.body().data;
+                        Alert.alert(v.getContext(), "Giỏ hàng", response.body().message);
                     }
-
-                    @Override
-                    public void onFailure(Call<GetCartReponse> call, Throwable t) {
-                        LoadingDialog.setLoading(v.getContext(),false);
-                        t.printStackTrace();
-
+                    else{
+                        Alert.alert(v.getContext(), "Đã có lỗi xẩy ra khi thêm cart");
                     }
-                });
-               // Alert.alert(v.getContext(), "Thêm vào giỏ hàng","Chức năng đang phát trieern " + product.id);
-            }
+                }
+
+                @Override
+                public void onFailure(Call<GetCartReponse> call, Throwable t) {
+                    LoadingDialog.setLoading(v.getContext(),false);
+                    t.printStackTrace();
+
+                }
+            });
+           // Alert.alert(v.getContext(), "Thêm vào giỏ hàng","Chức năng đang phát trieern " + product.id);
         });
     }
 
@@ -118,7 +116,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         // Ví dụ: ImageView imageView;
         //        TextView titleTextView;
         //        ...
-        TextView txtTitle, txtGia;
+        TextView txtTitle, txtGia,txtSLconLai;
         ImageView imgAnhSanPham;
         Button btnAddtoCart;
         public ViewHolder(View itemView) {
@@ -131,6 +129,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             txtTitle = itemView.findViewById(R.id.txtTitleProduct);
             imgAnhSanPham = itemView.findViewById(R.id.imgProduct);
             btnAddtoCart = itemView.findViewById(R.id.addProductToCard);
+            txtSLconLai = itemView.findViewById(R.id.txtsoLuongProduct);
         }
     }
 }
