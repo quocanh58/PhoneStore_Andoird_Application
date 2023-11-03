@@ -90,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
+                        android:textColor="@color/black"
                         android:checked="true"
                         android:id="@+id/radio_a"
                         android:text="Thanh toán khi nhận hàng"
@@ -97,6 +98,7 @@
                         android:layout_height="wrap_content" />
 
                     <RadioButton
+                        android:textColor="@color/black"
                         android:id="@+id/radio_b"
                         android:text="Thanh toán qua ngân hàng"
                         android:checked="true"
@@ -104,6 +106,7 @@
                         android:layout_height="wrap_content" />
 
                     <RadioButton
+                        android:textColor="@color/black"
                         android:id="@+id/radio_c"
                         android:text="Thanh toán qua momo"
                         android:layout_width="wrap_content"
