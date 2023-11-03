@@ -11,11 +11,14 @@ import android.widget.TextView;
 
 import com.example.login_form_2.adapter.CartAdapter;
 import com.example.login_form_2.adapter.PayAdapter;
+import com.example.login_form_2.model.cart.CartRequest;
 import com.example.login_form_2.model.cart.DataCart;
+import com.example.login_form_2.model.cart.GetCartReponse;
 import com.example.login_form_2.model.order.Order;
 import com.example.login_form_2.model.order.OrderReponse;
 import com.example.login_form_2.model.order.OrderRequest;
 import com.example.login_form_2.retrofit.APIClient;
+import com.example.login_form_2.retrofit_interface.CartServices;
 import com.example.login_form_2.retrofit_interface.OrderServices;
 import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
@@ -92,6 +95,32 @@ public class PayActivity extends AppCompatActivity {
                         LoadingDialog.setLoading(that, false);
                         if(response.code() == 200 && response.isSuccessful() && response.body() != null){
                             Alert.alert(that,response.body().message);
+
+                            for(DataCart dataCart : dataCarts){
+                                CartRequest request = new CartRequest();
+                                request.type = "delete";
+                                request.cartID = Function.getIntNumber( dataCart.id);
+                                request.userID = Function.getIntNumber( GlobalStore.currentUser.id);
+                                Call<GetCartReponse> call2 = APIClient.getClient().create(CartServices.class).deleteProductFromCart(request);
+                                call2.enqueue(new Callback<GetCartReponse>() {
+                                    @Override
+                                    public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
+                                        LoadingDialog.setLoading(v.getContext(), false);
+                                        if(response.isSuccessful() && response.body() != null && response.body().result == 1){
+                                            GlobalStore.currentDataCart = response.body().data;
+                                            CartActivity.UpdateListView();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<GetCartReponse> call, Throwable t) {
+                                        t.printStackTrace();
+                                        LoadingDialog.setLoading(v.getContext(), false);
+                                    }
+                                });
+                            }
+                            dataCarts.clear();
+                            payAdapter.notifyDataSetChanged();
+
                         }
                     }
 
