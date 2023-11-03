@@ -15,12 +15,13 @@ import com.example.login_form_2.adapter.CartAdapter;
 import com.example.login_form_2.model.cart.DataCart;
 import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
+import com.example.login_form_2.utils.Function;
 
 public class CartActivity extends AppCompatActivity {
     Context that = this;
-    ListView lvCart ;
+    ListView lvCart;
     CheckBox checkAllCart;
-    TextView totalPrice;
+    static TextView totalPrice;
     Button btnMuaHang;
     private CartAdapter cartAdapter;
 
@@ -33,19 +34,30 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void addEvent() {
-        lvCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               try{
-                   DataCart dataCart = GlobalStore.currentDataCart.get(position);
-                   Alert.alert(that,dataCart.toString());
-               }
-               catch (Exception e){
-                   e.printStackTrace();
-                   Alert.alert(that,"Đã có lỗi xảy ra", e.getMessage());
-               }
+        lvCart.setOnItemClickListener((parent, view, position, id) -> {
+            try {
+                DataCart dataCart = GlobalStore.currentDataCart.get(position);
+                Alert.alert(that, dataCart.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                Alert.alert(that, "Đã có lỗi xảy ra", e.getMessage());
             }
         });
+        checkAllCart.setOnClickListener(v -> {
+            double sum = 0;
+            for (DataCart dataCart : GlobalStore.currentDataCart) {
+                dataCart.isChecked = checkAllCart.isChecked();
+                if (dataCart.isChecked) {
+                    sum += Function.getIntNumber(dataCart.quantity) * Function.getDoubleNumber(dataCart.product.giasanpham);
+                }
+            }
+            cartAdapter.notifyDataSetChanged();
+            totalPrice.setText(Function.formatCurrency(sum));
+        });
+    }
+
+    public static void updateTotal(double price){
+        totalPrice.setText(Function.formatCurrency(price));
     }
 
     private void addControl() {
@@ -54,7 +66,8 @@ public class CartActivity extends AppCompatActivity {
         totalPrice = findViewById(R.id.txtTotalPriceCart);
         btnMuaHang = findViewById(R.id.btnMuaHang);
         // thêm cart
-        cartAdapter = new CartAdapter(that,R.layout.item_card, GlobalStore.currentDataCart);
+        cartAdapter = new CartAdapter(that, R.layout.item_card, GlobalStore.currentDataCart);
         lvCart.setAdapter(cartAdapter);
+        totalPrice.setText(Function.formatCurrency(CartAdapter.getTotalPriceCart()));
     }
 }

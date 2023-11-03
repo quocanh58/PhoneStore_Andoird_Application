@@ -33,7 +33,8 @@
     </ScrollView>
 
     <LinearLayout
-        android:background="@color/white"
+        android:background="@drawable/border_top"
+
         android:backgroundTint="@color/white"
         android:id="@+id/linearLayoutBottom"
         android:layout_width="match_parent"

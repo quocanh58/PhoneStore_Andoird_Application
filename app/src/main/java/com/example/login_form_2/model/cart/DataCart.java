@@ -11,6 +11,8 @@ public class DataCart {
     public String userID;
     public Product product;
 
+    public boolean isChecked = false;
+
     @NonNull
     @Override
     public String toString() {
