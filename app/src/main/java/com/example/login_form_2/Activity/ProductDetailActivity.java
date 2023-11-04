@@ -72,6 +72,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             cartRequest.productID = Function.getIntNumber(products.id);
             cartRequest.quantity = 1;
 
+
             Call<GetCartReponse> call = APIClient.getClient().create(CartServices.class).addProductToCart(cartRequest);
             call.enqueue(new Callback<GetCartReponse>() {
                 @Override

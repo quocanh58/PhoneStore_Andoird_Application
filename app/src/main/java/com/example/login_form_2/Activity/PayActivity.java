@@ -35,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PayActivity extends AppCompatActivity {
-    TextView txtPayInfo,txtPayAddress,txtTotalPricePay;
+    TextView txtPayInfo, txtPayAddress, txtTotalPricePay;
     Context that = this;
     public static ListView lvPay;
     public static PayAdapter payAdapter;
@@ -50,8 +50,8 @@ public class PayActivity extends AppCompatActivity {
         addControl();
         addEvent();
     }
-    long sum = 0;
 
+    long sum = 0;
 
     private void addControl() {
 
@@ -61,12 +61,12 @@ public class PayActivity extends AppCompatActivity {
 
         for (Map.Entry<DataCart, String> entry : CartActivity.dataCartsSeleted.entrySet()) {
             dataCarts.add(entry.getKey());
-            sum += Function.getLongNumber(entry.getKey().product.giasanpham) * Function.getLongNumber( entry.getKey().quantity);
+            sum += Function.getLongNumber(entry.getKey().product.giasanpham) * Function.getLongNumber(entry.getKey().quantity);
         }
 
         Intent intent2 = getIntent();
         product = (Product) intent.getSerializableExtra("muangay");
-        if(product != null){
+        if (product != null) {
             dataCarts.clear();
             DataCart dataCart = new DataCart();
             dataCart.product = product;
@@ -85,20 +85,25 @@ public class PayActivity extends AppCompatActivity {
         txtPayInfo.setText(GlobalStore.currentUser.name + " | " + GlobalStore.currentUser.phone);
 
         btnDatHang = findViewById(R.id.btnPay);
+
         txtTotalPricePay = findViewById(R.id.txtTotalPricePay);
         txtTotalPricePay.setText(Function.formatCurrency(sum));
+
     }
+
     private void addEvent() {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadingDialog.setLoading(that, true);
                 OrderRequest request = new OrderRequest();
+                //sum += Function.getLongNumber(product.giasanpham);
+
                 request.time = System.currentTimeMillis();
-                request.totalPrice = sum;
                 request.UserID = Integer.parseInt(GlobalStore.currentUser.id);
+                request.totalPrice = sum; //cập nhật giá khi tạo mới 1 đơn hàng
                 request.data = new ArrayList<>();
-                for(DataCart dataCart : dataCarts){
+                for (DataCart dataCart : dataCarts) {
                     Order order = new Order();
                     order.dongia = Function.getDoubleNumber(dataCart.product.giasanpham);
                     order.soluong = Integer.parseInt(dataCart.quantity);
@@ -111,29 +116,28 @@ public class PayActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<OrderReponse> call, Response<OrderReponse> response) {
                         LoadingDialog.setLoading(that, false);
-                        if(response.code() == 200 && response.isSuccessful() && response.body() != null){
+                        if (response.code() == 200 && response.isSuccessful() && response.body() != null) {
                             Alert.alert(that, response.body().message);
-
-                            for(DataCart dataCart : dataCarts){
+                            for (DataCart dataCart : dataCarts) {
                                 CartRequest request = new CartRequest();
                                 request.type = "delete";
-                                request.cartID = Function.getIntNumber( dataCart.id);
-                                request.userID = Function.getIntNumber( GlobalStore.currentUser.id);
+                                request.cartID = Function.getIntNumber(dataCart.id);
+                                request.userID = Function.getIntNumber(GlobalStore.currentUser.id);
                                 Call<GetCartReponse> call2 = APIClient.getClient().create(CartServices.class).deleteProductFromCart(request);
                                 call2.enqueue(new Callback<GetCartReponse>() {
                                     @Override
                                     public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
                                         LoadingDialog.setLoading(v.getContext(), false);
-                                        if(response.isSuccessful() && response.body() != null && response.body().result == 1){
+                                        if (response.isSuccessful() && response.body() != null && response.body().result == 1) {
                                             GlobalStore.currentDataCart = response.body().data;
-                                            if(product != null){
+                                            if (product != null) {
                                                 product = null;
-                                            }
-                                            else{
+                                            } else {
                                                 CartActivity.UpdateListView();
                                             }
                                         }
                                     }
+
                                     @Override
                                     public void onFailure(Call<GetCartReponse> call, Throwable t) {
                                         t.printStackTrace();
@@ -145,6 +149,7 @@ public class PayActivity extends AppCompatActivity {
                             payAdapter.notifyDataSetChanged();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<OrderReponse> call, Throwable t) {
                         LoadingDialog.setLoading(that, false);

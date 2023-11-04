@@ -9,7 +9,6 @@ public class DataCart {
 
     public String id;
     public String quantity;
-
     public String userID;
 
     public Product product;
