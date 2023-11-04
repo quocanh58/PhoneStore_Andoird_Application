@@ -3,6 +3,7 @@ package com.example.login_form_2.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.PayAdapter;
+import com.example.login_form_2.model.Product;
 import com.example.login_form_2.model.cart.CartRequest;
 import com.example.login_form_2.model.cart.DataCart;
 import com.example.login_form_2.model.cart.GetCartReponse;
@@ -39,6 +41,7 @@ public class PayActivity extends AppCompatActivity {
     public static PayAdapter payAdapter;
     Button btnDatHang;
     private ArrayList<DataCart> dataCarts;
+    private Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +57,25 @@ public class PayActivity extends AppCompatActivity {
 
         lvPay = findViewById(R.id.lvPay);
         dataCarts = new ArrayList<>();
+        Intent intent = getIntent();
+
         for (Map.Entry<DataCart, String> entry : CartActivity.dataCartsSeleted.entrySet()) {
             dataCarts.add(entry.getKey());
             sum += Function.getLongNumber(entry.getKey().product.giasanpham) * Function.getLongNumber( entry.getKey().quantity);
         }
+
+        Intent intent2 = getIntent();
+        product = (Product) intent.getSerializableExtra("muangay");
+        if(product != null){
+            dataCarts.clear();
+            DataCart dataCart = new DataCart();
+            dataCart.product = product;
+            dataCart.userID = GlobalStore.currentUser.id;
+            dataCart.quantity = "1";
+            dataCart.isChecked = false;
+            dataCarts.add(dataCart);
+        }
+
         payAdapter = new PayAdapter(that, R.layout.item_pay, dataCarts);
         lvPay.setAdapter(payAdapter);
         txtPayAddress = findViewById(R.id.txtPayAddress);
@@ -108,7 +126,12 @@ public class PayActivity extends AppCompatActivity {
                                         LoadingDialog.setLoading(v.getContext(), false);
                                         if(response.isSuccessful() && response.body() != null && response.body().result == 1){
                                             GlobalStore.currentDataCart = response.body().data;
-                                            CartActivity.UpdateListView();
+                                            if(product != null){
+                                                product = null;
+                                            }
+                                            else{
+                                                CartActivity.UpdateListView();
+                                            }
                                         }
                                     }
                                     @Override

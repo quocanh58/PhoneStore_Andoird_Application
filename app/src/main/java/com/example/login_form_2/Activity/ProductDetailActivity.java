@@ -95,7 +95,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
 
         btnMua.setOnClickListener(v -> {
-            Alert.alert(v.getContext(), "Chức năng mua ngay", "Chức năng đang phát trieern " + products.id);
+            Intent intent1 = new Intent(that, PayActivity.class);
+            intent1.putExtra("muangay",products);
+            startActivity(intent1)  ;
         });
     }
 
