@@ -1,4 +1,4 @@
-package com.example.login_form_2;
+package com.example.login_form_2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,19 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.CartAdapter;
 import com.example.login_form_2.model.cart.DataCart;
 import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.Function;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CartActivity extends AppCompatActivity  {

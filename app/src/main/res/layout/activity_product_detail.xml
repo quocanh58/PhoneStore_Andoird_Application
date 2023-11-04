@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background5"
-    tools:context=".ProductDetailActivity"
+    tools:context=".Activity.ProductDetailActivity"
     >
     <ImageView
         android:layout_gravity="center"
         android:id="@+id/imgProduct"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
         android:layout_marginRight="10dp"
         android:layout_marginVertical="5dp"
@@ -34,12 +34,14 @@
             android:textSize="18sp"
             android:hint="Tên sản phẩm"
             android:textStyle="bold"
+            android:paddingBottom="3dp"
             android:textColor="@color/black"/>
         <TextView
             android:id="@+id/tvLoaisp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:paddingBottom="3dp"
             android:hint="Loai sp"
             android:textColor="@color/black"
             android:isScrollContainer="true"
@@ -50,15 +52,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:paddingBottom="3dp"
             android:textColor="@color/black"
             android:hint="Giá"/>
-
 
         <TextView
             android:id="@+id/tvProductDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:paddingBottom="3dp"
             android:textColor="@color/black"
             android:hint="Mô tả"/>
 
@@ -76,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        >
         <Button
             android:id="@+id/btnThemGioHang"
             android:layout_weight="1"

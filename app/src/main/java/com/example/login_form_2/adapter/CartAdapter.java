@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.login_form_2.CartActivity;
+import com.example.login_form_2.Activity.CartActivity;
 import com.example.login_form_2.R;
 import com.example.login_form_2.model.cart.CartRequest;
 import com.example.login_form_2.model.cart.DataCart;
@@ -61,6 +61,7 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
         }
+
         DataCart dataCart = objects.get(position);
         CheckBox checkcart = convertView.findViewById(R.id.checkCart);
 
@@ -80,7 +81,6 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
                 );
         title.setText(dataCart.product.tensanpham);
         price.setText(Function.formatCurrency(Function.getDoubleNumber(dataCart.product.giasanpham)));
-
 
         // sự kiện
         if(dataCart.isChecked){

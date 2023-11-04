@@ -8,7 +8,7 @@
     android:background="@color/white"
     android:backgroundTint="@color/white"
     android:padding="10dp"
-    tools:context=".PayActivity">
+    tools:context=".Activity.PayActivity">
     <LinearLayout
         android:id="@+id/LinearLayout1w"
         android:layout_width="match_parent"

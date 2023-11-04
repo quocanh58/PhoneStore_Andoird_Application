@@ -1,4 +1,4 @@
-package com.example.login_form_2;
+package com.example.login_form_2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.login_form_2.adapter.CartAdapter;
+import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.PayAdapter;
 import com.example.login_form_2.model.cart.CartRequest;
 import com.example.login_form_2.model.cart.DataCart;
@@ -26,7 +26,6 @@ import com.example.login_form_2.utils.Function;
 import com.example.login_form_2.utils.LoadingDialog;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 
 import retrofit2.Call;
