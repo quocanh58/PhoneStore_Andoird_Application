@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     @SerializedName("Id")
     public String id;
     public String tensanpham;

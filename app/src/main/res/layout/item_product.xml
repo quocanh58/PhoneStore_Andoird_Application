@@ -5,7 +5,7 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="5dp"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="8dp">
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imgProduct"
@@ -42,8 +42,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Giá"
+                android:layout_weight="0.25"
+                android:text="Giá: "
                 android:textColor="#F10909"
                 android:textSize="13dp"
                 android:textStyle="bold"></TextView>
@@ -67,11 +67,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="Còn lại"
+                android:layout_weight="0.45"
+                android:text="Còn lại: "
                 android:textColor="#F10909"
                 android:textSize="13dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold">
+            </TextView>
 
             <TextView
                 android:id="@+id/txtsoLuongProduct"
@@ -81,7 +82,9 @@
                 android:text="10"
                 android:textColor="#F10909"
                 android:textSize="15dp"
-                android:textStyle="bold"></TextView>
+                android:gravity="center"
+                android:textStyle="bold">
+            </TextView>
 
         </LinearLayout>
 
@@ -93,7 +96,6 @@
             android:text="Thêm vào giỏ hàng"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
         </Button>
 
     </LinearLayout>

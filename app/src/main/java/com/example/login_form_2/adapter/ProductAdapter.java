@@ -60,8 +60,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         //        ...
 
         holder.txtTitle.setText(product.tensanpham);
-        holder.txtGia.setText(product.giasanpham);
-        holder.txtSLconLai.setText(Function.formatCurrency(Function.getDoubleNumber(product.giasanpham)));
+        holder.txtGia.setText(Function.formatCurrency(Function.getDoubleNumber(product.giasanpham)));
+        holder.txtSLconLai.setText(product.soluong);
         String imageUrl = product.hinhanhsanpham; // Đường dẫn đến hình ảnh
         Picasso.get()
                 .load(imageUrl)

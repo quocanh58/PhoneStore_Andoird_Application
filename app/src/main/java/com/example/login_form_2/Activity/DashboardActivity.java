@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.example.login_form_2.CartActivity;
+import com.example.login_form_2.ProductDetailActivity;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.LoaispAdapter;
 import com.example.login_form_2.adapter.ProductAdapter;
@@ -131,7 +132,10 @@ public class DashboardActivity extends AppCompatActivity {
                         productAdapter = new ProductAdapter(productList); // productList là danh sách sản phẩm
                         productAdapter.setOnItemClickListener(position1 -> {
                             Product product = productList.get(position1);
-                            Alert.alert(that,product.toString());
+                            Intent intent = new Intent(that, ProductDetailActivity.class);
+                            intent.putExtra("product", product);
+
+                            startActivity(intent);
                         });
                         recyclerViewDashboard.setAdapter(productAdapter);
 
@@ -144,7 +148,6 @@ public class DashboardActivity extends AppCompatActivity {
                         recyclerViewDashboard.setAdapter(productAdapter);
                     }
                     // Đóng Navigation Drawer sau khi chọn mục
-
                 }
             }
 
@@ -232,7 +235,10 @@ public class DashboardActivity extends AppCompatActivity {
                                 productAdapter = new ProductAdapter(productList); // productList là danh sách sản phẩm
                                 productAdapter.setOnItemClickListener(position1 -> {
                                     Product product = productList.get(position1);
-                                    Alert.alert(that,product.toString());
+                                    /*Alert.alert(that,product.toString());*/
+                                    Intent intent = new Intent(that, ProductDetailActivity.class);
+                                    intent.putExtra("product", product);
+                                    startActivity(intent);
                                 });
                                 recyclerViewDashboard.setAdapter(productAdapter);
 

@@ -45,8 +45,6 @@ public class CartAdapter extends ArrayAdapter<DataCart> {
         this.objects = objects;
     }
 
-
-
     public static double getTotalPriceCart(){
         int sum = 0;
         for(DataCart dataCart : objects){
