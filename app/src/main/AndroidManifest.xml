@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".AdminProductActivity"
+            android:name=".AdminDashboardActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ProductDetailActivity"

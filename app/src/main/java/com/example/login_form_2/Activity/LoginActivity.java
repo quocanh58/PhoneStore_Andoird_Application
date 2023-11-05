@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.login_form_2.AdminDashboardActivity;
 import com.example.login_form_2.R;
 import com.example.login_form_2.model.login.LoginReponse;
 import com.example.login_form_2.model.login.LoginRequest;
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                        }
                                                        else{
-                                                           // intetn sang màn hình admin
+                                                           intents = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                                                        }
 
                                                         startActivity(intents);
