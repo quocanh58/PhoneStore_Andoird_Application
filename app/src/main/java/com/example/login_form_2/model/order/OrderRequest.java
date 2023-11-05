@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class OrderRequest {
+
+    public String type;
     public int UserID;
     public long time;
     public long totalPrice;

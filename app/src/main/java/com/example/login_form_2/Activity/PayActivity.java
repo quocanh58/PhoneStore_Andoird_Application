@@ -97,8 +97,7 @@ public class PayActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LoadingDialog.setLoading(that, true);
                 OrderRequest request = new OrderRequest();
-                //sum += Function.getLongNumber(product.giasanpham);
-
+                request.type = "insert";
                 request.time = System.currentTimeMillis();
                 request.UserID = Integer.parseInt(GlobalStore.currentUser.id);
                 request.totalPrice = sum; //cập nhật giá khi tạo mới 1 đơn hàng
