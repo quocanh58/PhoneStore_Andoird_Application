@@ -84,7 +84,15 @@ public class LoginActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onPositiveButtonClick() {
                                                         GlobalStore.currentUser = reponse.user;
-                                                        Intent intents = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                        Intent intents = null;
+                                                       if(reponse.user.role.equals("user")){
+                                                            intents = new Intent( LoginActivity.this, DashboardActivity.class);
+
+                                                       }
+                                                       else{
+                                                           // intetn sang màn hình admin
+                                                       }
+
                                                         startActivity(intents);
                                                         finish();
                                                     }
