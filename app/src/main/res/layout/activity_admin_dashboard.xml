@@ -64,7 +64,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:backgroundTint="#5DA331"
-            android:text="Quản lý loại đơn hàng"
+            android:text="Quản lý đơn hàng"
             android:textColor="@color/white"></Button>
 
 

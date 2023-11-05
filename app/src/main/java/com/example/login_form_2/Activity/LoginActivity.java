@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                                             intents = new Intent( LoginActivity.this, DashboardActivity.class);
 
                                                        }
-                                                       else{
+                                                       else if (reponse.user.role.equals("admin")){
                                                            intents = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                                                        }
 
