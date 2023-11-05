@@ -54,6 +54,8 @@ public class PayActivity extends AppCompatActivity {
     long sum = 0;
 
     private void addControl() {
+        txtTotalPricePay = findViewById(R.id.txtTotalPricePay);
+
 
         lvPay = findViewById(R.id.lvPay);
         dataCarts = new ArrayList<>();
@@ -63,6 +65,8 @@ public class PayActivity extends AppCompatActivity {
             dataCarts.add(entry.getKey());
             sum += Function.getLongNumber(entry.getKey().product.giasanpham) * Function.getLongNumber(entry.getKey().quantity);
         }
+
+        txtTotalPricePay.setText(Function.formatCurrency(sum));
 
         Intent intent2 = getIntent();
         product = (Product) intent.getSerializableExtra("muangay");
@@ -74,6 +78,7 @@ public class PayActivity extends AppCompatActivity {
             dataCart.quantity = "1";
             dataCart.isChecked = false;
             dataCarts.add(dataCart);
+            txtTotalPricePay.setText(Function.formatCurrency(Function.getLongNumber(dataCart.product.giasanpham)));
         }
 
         payAdapter = new PayAdapter(that, R.layout.item_pay, dataCarts);
@@ -86,21 +91,19 @@ public class PayActivity extends AppCompatActivity {
 
         btnDatHang = findViewById(R.id.btnPay);
 
-        txtTotalPricePay = findViewById(R.id.txtTotalPricePay);
-        txtTotalPricePay.setText(Function.formatCurrency(sum));
-
     }
 
     private void addEvent() {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                long sum = 0;
                 LoadingDialog.setLoading(that, true);
                 OrderRequest request = new OrderRequest();
+
                 request.type = "insert";
                 request.time = System.currentTimeMillis();
                 request.UserID = Integer.parseInt(GlobalStore.currentUser.id);
-                request.totalPrice = sum; //cập nhật giá khi tạo mới 1 đơn hàng
                 request.data = new ArrayList<>();
                 for (DataCart dataCart : dataCarts) {
                     Order order = new Order();
@@ -108,7 +111,10 @@ public class PayActivity extends AppCompatActivity {
                     order.soluong = Integer.parseInt(dataCart.quantity);
                     order.idsanpham = Integer.parseInt(dataCart.product.id);
                     request.data.add(order);
+                    sum += Function.getLongNumber(dataCart.product.giasanpham) * Function.getLongNumber(dataCart.quantity);
                 }
+
+                request.totalPrice = sum; //cập nhật giá khi tạo mới 1 đơn hàng
 
                 Call<OrderReponse> call = APIClient.getClient().create(OrderServices.class).addOrder(request);
                 call.enqueue(new Callback<OrderReponse>() {
