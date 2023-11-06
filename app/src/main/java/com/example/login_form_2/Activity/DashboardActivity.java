@@ -328,6 +328,11 @@ public class DashboardActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.my_order_button){
+            Alert.alert(that,"Đang phát triển");
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

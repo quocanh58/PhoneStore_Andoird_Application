@@ -6,4 +6,10 @@
         android:icon="@drawable/icons8_cart_64"
         android:title="Your Title"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/my_order_button"
+        android:icon="@drawable/shopping_bag"
+        android:title="Your Title"
+        app:showAsAction="always" />
 </menu>

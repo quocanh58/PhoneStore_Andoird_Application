@@ -32,7 +32,7 @@
         android:drawableLeft="@drawable/baseline_person_outline_24"
         android:drawablePadding="10dp"
         android:hint="Email"
-        android:text="at050801@gmail.com"
+        android:text="vohoangkiet.dev2510@gmail.com"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         android:textSize="20dp" />
@@ -48,7 +48,7 @@
         android:inputType="textPassword"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
-        android:text="Quocanh0508@"
+        android:text="Ngocnhu1002@"
         android:textSize="20dp" />
 
     <LinearLayout
