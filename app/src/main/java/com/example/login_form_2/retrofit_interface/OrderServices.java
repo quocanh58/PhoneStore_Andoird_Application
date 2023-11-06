@@ -18,6 +18,6 @@ public interface OrderServices {
     Call<OrderReponse> addOrder (@Body OrderRequest user);
 
 
-    @GET("order.php?getAllOrder&")
-    Call<GetOrderByUserReponse> getAllCartOfUser(@Query("userID") long userID);
+    @GET("order.php?getAllOrder")
+    Call<GetOrderByUserReponse> getAllOrderOfUser(@Query("userID") int userID);
 }
