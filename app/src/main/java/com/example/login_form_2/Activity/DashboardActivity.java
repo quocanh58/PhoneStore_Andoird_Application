@@ -353,6 +353,7 @@ public class DashboardActivity extends AppCompatActivity {
         listViewDashboard.setAdapter(loaispAdapter);
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(productList);
+
     }
 
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    tools:context=".AdminProductActivity">
+    tools:context=".Activity.AdminProductActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="giá"
+                android:text="Giá"
                 android:textSize="14dp">
 
             </TextView>

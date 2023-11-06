@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/border_background"
     android:padding="5dp"
-    tools:context=".AdminUserActivity">
+    tools:context=".Activity.AdminUserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

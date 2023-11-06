@@ -17,16 +17,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".AdminOrderActivity"
+            android:name=".Activity.AdminOrderDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminProductActivity"
+            android:name=".Activity.AdminOrderActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminUserActivity"
+            android:name=".Activity.AdminProductActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminDashboardActivity"
+            android:name=".Activity.AdminUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AdminDashboardActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ProductDetailActivity"

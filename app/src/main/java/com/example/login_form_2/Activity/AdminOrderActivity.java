@@ -1,14 +1,16 @@
-package com.example.login_form_2;
+package com.example.login_form_2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class AdminUserActivity extends AppCompatActivity {
+import com.example.login_form_2.R;
+
+public class AdminOrderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_user);
+        setContentView(R.layout.activity_admin_order);
     }
 }

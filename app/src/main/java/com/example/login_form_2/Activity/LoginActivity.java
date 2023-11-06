@@ -1,17 +1,13 @@
 package com.example.login_form_2.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.login_form_2.AdminDashboardActivity;
 import com.example.login_form_2.R;
 import com.example.login_form_2.model.login.LoginReponse;
 import com.example.login_form_2.model.login.LoginRequest;
@@ -20,10 +16,6 @@ import com.example.login_form_2.retrofit_interface.LoginServices;
 import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
 import com.example.login_form_2.utils.LoadingDialog;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
