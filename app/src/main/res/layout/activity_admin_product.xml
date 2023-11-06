@@ -3,86 +3,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/border_background"
+    android:layout_height="wrap_content"
     android:padding="5dp"
-    tools:context=".AdminUserActivity">
+    tools:context=".AdminProductActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.25"
+            android:src="@drawable/loadfail"></ImageView>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="vertical"
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/tvEmailUser"
+                android:id="@+id/tvAdminProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Email User"
-                android:textSize="17dp">
+                android:text="Tên sản phẩm"
+                android:textSize="14dp">
 
             </TextView>
 
             <TextView
-                android:id="@+id/tvFullnameUser"
+                android:id="@+id/tvAdminCategoryProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Fullname User"
-                android:textSize="17dp">
+                android:text="Loại sản phẩm"
+                android:textSize="14dp">
 
             </TextView>
 
             <TextView
-                android:id="@+id/tvAddressUser"
+                android:id="@+id/tvAdminProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Address"
-                android:textSize="17dp">
+                android:text="giá"
+                android:textSize="14dp">
 
             </TextView>
-
-            <TextView
-                android:id="@+id/tvPhoneUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="Phone"
-                android:textSize="17dp"></TextView>
-
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:gravity="center"
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnAdminUpdateUser"
+                android:id="@+id/btnAdminViewProduct"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
+                android:backgroundTint="#5DA331"
+                android:text="Xem"
+                android:textColor="@color/white"></Button>
+
+            <Button
+                android:id="@+id/btnAdminUpdateProduct"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
                 android:backgroundTint="#5DA331"
                 android:text="Sửa"
                 android:textColor="@color/white"></Button>
 
             <Button
-                android:id="@+id/btnAdminBanUser"
+                android:id="@+id/btnAdminDeleteUser"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:backgroundTint="#C1F44336"
-                android:text="Ban"
+                android:backgroundTint="#7EF44336"
+                android:text="Xóa"
                 android:textColor="@color/white"></Button>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
