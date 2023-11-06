@@ -1,4 +1,4 @@
-package com.example.login_form_2;
+package com.example.login_form_2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.login_form_2.OrderInfoActivity;
+import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.OrderAdapter;
 import com.example.login_form_2.model.order.DataOrder;
 import com.example.login_form_2.model.order.Donhang;
@@ -49,7 +51,7 @@ public class OrderActivity extends AppCompatActivity {
 
             try {
                 Donhang donHang = dataOrders.get(position).donhang;
-                Intent intent = new Intent(that,OrderInfoActivity.class);
+                Intent intent = new Intent(that, OrderInfoActivity.class);
                 intent.putExtra("donHang", donHang);
                 startActivityForResult(intent, REQUEST_CODE_ORDER_INFO);
             }

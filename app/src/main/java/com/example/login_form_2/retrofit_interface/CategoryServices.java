@@ -9,5 +9,4 @@ public interface CategoryServices {
     @GET("LoaiSanPham.php?getAllSanPham")
     Call<GetCategoryReponse> getAllLoaiSanPham();
 
-
 }

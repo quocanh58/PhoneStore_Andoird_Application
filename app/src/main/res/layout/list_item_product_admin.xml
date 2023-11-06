@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarDashboardAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#6F2196F3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Quản lý sản phẩm"
+            android:textColor="@color/purple_500"
+            android:textSize="30dp"
+            android:textStyle="bold"></TextView>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <Button
+        android:id="@+id/btnAdminAddProductItem"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#5DA331"
+        android:text="Thêm mới sản phẩm"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"></Button>
+
+    <ListView
+        android:id="@+id/lvProductItemAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp" />
+</LinearLayout>

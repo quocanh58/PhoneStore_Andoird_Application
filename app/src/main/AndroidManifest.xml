@@ -22,8 +22,12 @@
         <activity
             android:name=".Activity.AdminOrderDetailActivity"
             android:exported="false" />
+
         <activity
-            android:name=".OrderActivity"
+            android:name=".Activity.OrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AdminProductCategoryActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.AdminOrderActivity"
