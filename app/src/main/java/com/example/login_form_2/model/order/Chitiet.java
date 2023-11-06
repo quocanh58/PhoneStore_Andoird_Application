@@ -3,7 +3,9 @@ package com.example.login_form_2.model.order;
 import com.example.login_form_2.model.Product;
 import com.google.gson.annotations.SerializedName;
 
-public class Chitiet {
+import java.io.Serializable;
+
+public class Chitiet implements Serializable {
     @SerializedName("Id")
     public String id;
     public String iddonhang;

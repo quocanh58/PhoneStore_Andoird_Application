@@ -4,9 +4,10 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GetOrderByUserReponse {
+public class GetOrderByUserReponse implements Serializable {
     public int result;
     public String message;
     public ArrayList<DataOrder> data;

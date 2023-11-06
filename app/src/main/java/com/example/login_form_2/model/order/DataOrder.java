@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
-public class DataOrder {
+import java.io.Serializable;
+
+public class DataOrder implements Serializable {
     public Donhang donhang;
 
     @NonNull

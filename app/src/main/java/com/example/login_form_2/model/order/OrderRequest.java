@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class OrderRequest {
 
+
+    public int orderId;
+
+
     public String type;
     public int UserID;
     public long time;

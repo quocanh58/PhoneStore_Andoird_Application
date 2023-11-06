@@ -15,9 +15,13 @@ import retrofit2.http.Query;
 
 public interface OrderServices {
     @POST("order.php")
-    Call<OrderReponse> addOrder (@Body OrderRequest user);
+    Call<OrderReponse> addOrder (@Body OrderRequest order);
 
 
     @GET("order.php?getAllOrder")
     Call<GetOrderByUserReponse> getAllOrderOfUser(@Query("userID") int userID);
+
+    @POST("order.php")
+    Call<GetOrderByUserReponse> DeleteOrder (@Body OrderRequest order);
+
 }

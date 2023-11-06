@@ -16,6 +16,7 @@ import com.example.login_form_2.model.Product;
 import com.example.login_form_2.model.cart.CartRequest;
 import com.example.login_form_2.model.cart.DataCart;
 import com.example.login_form_2.model.cart.GetCartReponse;
+import com.example.login_form_2.model.order.Chitiet;
 import com.example.login_form_2.model.order.Order;
 import com.example.login_form_2.model.order.OrderReponse;
 import com.example.login_form_2.model.order.OrderRequest;
@@ -42,6 +43,8 @@ public class PayActivity extends AppCompatActivity {
     Button btnDatHang;
     private ArrayList<DataCart> dataCarts;
     private Product product;
+
+    private ArrayList<Chitiet> muaLai = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,23 @@ public class PayActivity extends AppCompatActivity {
             dataCart.isChecked = false;
             dataCarts.add(dataCart);
             txtTotalPricePay.setText(Function.formatCurrency(Function.getLongNumber(dataCart.product.giasanpham)));
+        }
+
+        muaLai = (ArrayList<Chitiet>) intent.getSerializableExtra("mualai");
+        if(muaLai != null && muaLai.size() > 0){
+            dataCarts.clear();
+            long sum = 0 ;
+            for(Chitiet chitiet : muaLai){
+                DataCart dataCart = new DataCart();
+                dataCart.product = chitiet.sanpham;
+                dataCart.userID = GlobalStore.currentUser.id;
+                dataCart.quantity = chitiet.soluong;
+                dataCart.isChecked = false;
+                dataCarts.add(dataCart);
+                sum += Function.getLongNumber(chitiet.dongia) * Function.getLongNumber(chitiet.soluong);
+            }
+
+            txtTotalPricePay.setText(Function.formatCurrency(sum));
         }
 
         payAdapter = new PayAdapter(that, R.layout.item_pay, dataCarts);
@@ -137,12 +157,14 @@ public class PayActivity extends AppCompatActivity {
                                             GlobalStore.currentDataCart = response.body().data;
                                             if (product != null) {
                                                 product = null;
-                                            } else {
+                                            }
+                                            else if(muaLai != null && muaLai.size() > 0){
+                                                muaLai.clear();
+                                            }else {
                                                 CartActivity.UpdateListView();
                                             }
                                         }
                                     }
-
                                     @Override
                                     public void onFailure(Call<GetCartReponse> call, Throwable t) {
                                         t.printStackTrace();
