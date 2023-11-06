@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.example.login_form_2.OrderActivity;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.LoaispAdapter;
 import com.example.login_form_2.adapter.ProductAdapter;
@@ -329,7 +330,9 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         if(id == R.id.my_order_button){
-            Alert.alert(that,"Đang phát triển");
+            //Alert.alert(that,"Đang phát triển");
+            Intent intent = new Intent(that, OrderActivity.class);
+            startActivity(intent);
             return true;
         }
 
