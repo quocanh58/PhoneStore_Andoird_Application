@@ -12,7 +12,7 @@ import com.example.login_form_2.R;
 
 public class AdminDashboardActivity extends AppCompatActivity {
 
-    Button btnQuanLyTaiKhoan, btnQuanLySP, btnQuanLyDonHang;
+    Button btnQuanLyTaiKhoan, btnQuanLySP, btnQuanLyDonHang, btnQuanLyLoaiSP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +35,22 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnQuanLySP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminDashboardActivity.this, AdminProductActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(AdminDashboardActivity.this, AdminProductActivity.class);
+                startActivity(intent2);
             }
         });
         btnQuanLyDonHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminDashboardActivity.this, AdminOrderActivity.class);
-                startActivity(intent);
+                Intent intent3 = new Intent(AdminDashboardActivity.this, AdminOrderActivity.class);
+                startActivity(intent3);
+            }
+        });
+        btnQuanLyLoaiSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = new Intent(AdminDashboardActivity.this, AdminProductCategoryActivity.class);
+                startActivity(intent4);
             }
         });
     }

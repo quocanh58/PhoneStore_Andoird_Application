@@ -17,13 +17,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.AdminOrderDetailActivity"
-            android:exported="false"
-             />
+            android:name=".Activity.AdminProductCategoryActivity"
+            android:exported="false" />
         <activity
-            android:name=".OrderActivity"
-            android:exported="false"
-            />
+            android:name=".Activity.AdminOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OrderActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.AdminOrderActivity"
             android:exported="false" />

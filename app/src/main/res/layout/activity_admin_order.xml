@@ -13,9 +13,9 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -24,9 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Tên khách hàng"
-                android:textStyle="bold"
                 android:textColor="#3F51B5"
-                android:textSize="14dp">
+                android:textSize="14dp"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -55,13 +55,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:textColor="#5DA331"
                 android:text="Trạng thái đơn hàng"
-                android:textSize="14dp">
+                android:textColor="#5DA331"
+                android:textSize="14dp"
+                android:textStyle="bold">
 
             </TextView>
         </LinearLayout>
+
         <LinearLayout
             android:layout_weight="0.35"
             android:layout_width="0dp"
