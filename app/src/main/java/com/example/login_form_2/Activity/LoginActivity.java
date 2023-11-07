@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,14 +29,15 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edtUsername, edtPassword;
     Button btnLogin, btnSignUpEmail, btnCheckOTP;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         addControl();
         addEvent();
-
     }
 
     private void addEvent() {
@@ -85,7 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                                                        else if (reponse.user.role.equals("admin")){
                                                            intents = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                                                        }
-
+                                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                        editor.putString("username", edtUsername.getText().toString());
+                                                        editor.putString("password", edtPassword.getText().toString());
+                                                        editor.apply();
                                                         startActivity(intents);
                                                         finish();
                                                     }
@@ -130,5 +135,14 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin1);
         btnSignUpEmail = findViewById(R.id.btnSignUpEmail);
 
+       try{
+           String username = sharedPreferences.getString("username", "");
+           String password = sharedPreferences.getString("password", "");
+           edtUsername.setText(username);
+           edtPassword.setText(password);
+       }
+       catch (Exception e){
+
+       }
     }
 }
