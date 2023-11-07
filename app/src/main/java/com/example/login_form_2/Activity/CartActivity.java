@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.CartAdapter;
+import com.example.login_form_2.model.Product;
 import com.example.login_form_2.model.cart.DataCart;
 import com.example.login_form_2.store.GlobalStore;
 import com.example.login_form_2.utils.Alert;
@@ -44,7 +45,10 @@ public class CartActivity extends AppCompatActivity  {
         lvCart.setOnItemClickListener((parent, view, position, id) -> {
             try {
                 DataCart dataCart = GlobalStore.currentDataCart.get(position);
-                Alert.alert(that, dataCart.toString());
+                Product product = dataCart.product;
+                Intent intent = new Intent(that, ProductDetailActivity.class);
+                intent.putExtra("product",product);
+                startActivity(intent);
             } catch (Exception e) {
                 e.printStackTrace();
                 Alert.alert(that, "Đã có lỗi xảy ra", e.getMessage());
