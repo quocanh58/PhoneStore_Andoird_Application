@@ -64,6 +64,7 @@ public class DashboardActivity extends AppCompatActivity {
     Button btnSignOut;
     ArrayList<LoaiSanPham> mangLoaisp;
     LoaispAdapter loaispAdapter;
+    int PositionSelectTabLoai = 0 ;
     int id;
 
     Boolean result = true;
@@ -225,6 +226,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
             LoaiSanPham loai = mangLoaisp.get(position);
             if(position != 0 && position != mangLoaisp.size() -1 && position != mangLoaisp.size() -2){
+                PositionSelectTabLoai =position;
                 LoadingDialog.setLoading(that,true);
                 Call<GetProductReponse> call = APIClient.getClient().create(ProductServices.class).getSanPhamByCategoryID(loai.Id);
                 call.enqueue(new Callback<GetProductReponse>() {
@@ -368,7 +370,9 @@ public class DashboardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                getDataSanPham();
+                if(PositionSelectTabLoai == 0){
+                    getDataSanPham();
+                }
                 getDataCart(Long.parseLong(GlobalStore.currentUser.id));
             }
         }
