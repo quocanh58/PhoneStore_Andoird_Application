@@ -19,7 +19,7 @@ public class AdminOrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_order);
+        setContentView(R.layout.item_admin_order);
 
         addControl();
         addEvents();

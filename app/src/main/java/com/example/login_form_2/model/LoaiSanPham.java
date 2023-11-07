@@ -6,7 +6,9 @@ import com.example.login_form_2.store.GlobalStore;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-public class LoaiSanPham {
+import java.io.Serializable;
+
+public class LoaiSanPham implements Serializable {
     public long Id;
     @SerializedName("tenloaisanpham")
     public String tenLoaisp;

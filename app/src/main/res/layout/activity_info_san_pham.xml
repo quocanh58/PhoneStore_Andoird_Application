@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".InfoSanPham">
+    <TextView
+        android:id="@+id/txtTitle"
+        android:textSize="20dp"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:text="sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <TextView
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:text="Tên sản phẩm :"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <EditText
+        android:id="@+id/txtInfoTitleProduct"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:hint="Nhập tên sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
+    <TextView
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:text="Loại sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <Spinner
+        android:id="@+id/spinnerInfoLoaiProduct"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+    <TextView
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:text="Hình ảnh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+
+
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/txtInfoHinhAnhProduct"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:hint="Nhập link hình ảnh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
+    <ImageView
+        android:id="@+id/imgInfoAnhSanPham"
+        android:src="@drawable/loadfail"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+    </ImageView>
+    <TextView
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:text="Giá sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <EditText
+        android:id="@+id/txtInfoGiaProduct"
+        android:inputType="number"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:hint="Nhập giá sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
+    <TextView
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:text="Mô tả sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <EditText
+        android:id="@+id/txtInfoMoTaProduct"
+        android:inputType="number"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:hint="Nhập giá sản phẩm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnInfoSuaProduct"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:text="Sửa"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </Button>
+        <Button
+            android:id="@+id/btnInfoThemMoiProduct"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:text="Thêm mới"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </Button>
+        <Button
+            android:id="@+id/btnInfoXoaroduct"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:text="Xoá"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </Button>
+    </LinearLayout>
+</LinearLayout>

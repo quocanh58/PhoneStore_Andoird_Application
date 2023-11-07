@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".InfoLoaiSPActivity">
+
+    <ImageView
+        android:id="@+id/imgInfoLoaiSP"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:src="@drawable/loadfail">
+
+    </ImageView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tên Loại Sản Phẩm"
+        android:textAlignment="textStart"
+        android:maxLines="1"
+        android:textColor="@color/black">
+    </TextView>
+
+    <EditText
+        android:id="@+id/txtTenLoaiSP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:text="Loại 1"
+        android:singleLine="true"
+        android:textColor="@color/black"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hình ảnh"
+        android:textAlignment="textStart"
+        android:textColor="@color/black">
+    </TextView>
+
+    <EditText
+        android:id="@+id/txtHinhanhLoaiSP"
+        android:textSize="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+          android:singleLine="true"
+        android:text="Hình ản.............."
+        android:textColor="@color/black"></EditText>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <TableRow android:layout_height="50dp">
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnSuaLoai"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Sửa"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+            </Button>
+            <Button
+                android:id="@+id/btnThemMoiLoai"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Thêm mới"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+            </Button>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnXoaLoai"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:text="Xoá"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+            </Button>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

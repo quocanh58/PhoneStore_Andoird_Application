@@ -17,12 +17,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".InfoSanPham"
+            android:exported="false" />
+        <activity
+            android:name=".InfoLoaiSPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QLLoaiSanPham"
+            android:exported="false" />
+        <activity
             android:name=".OrderInfoActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.AdminOrderDetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activity.OrderActivity"
             android:exported="false" />

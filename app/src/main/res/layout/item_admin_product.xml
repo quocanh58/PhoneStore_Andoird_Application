@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:padding="5dp"
-    tools:context=".Activity.AdminProductActivity">
-
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/item_admin_product_img"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -27,7 +24,7 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/tvAdminProductName"
+                android:id="@+id/item_admin_product_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -37,7 +34,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/tvAdminCategoryProductName"
+                android:id="@+id/item_admin_product_categoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -47,13 +44,12 @@
             </TextView>
 
             <TextView
-                android:id="@+id/tvAdminProductPrice"
+                android:id="@+id/item_admin_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Giá"
                 android:textSize="14dp">
-
             </TextView>
         </LinearLayout>
 
@@ -65,16 +61,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnAdminViewProduct"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:backgroundTint="#5DA331"
-                android:text="Xem"
-                android:textColor="@color/white"></Button>
+
 
             <Button
-                android:id="@+id/btnAdminUpdateProduct"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/item_admin_product_btnSua"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:backgroundTint="#5DA331"
@@ -82,7 +74,9 @@
                 android:textColor="@color/white"></Button>
 
             <Button
-                android:id="@+id/btnAdminDeleteUser"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/item_admin_product_btnXoa"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:backgroundTint="#7EF44336"

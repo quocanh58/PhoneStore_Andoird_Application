@@ -11,6 +11,6 @@ public class AdminProductCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_product_category);
+        setContentView(R.layout.item_admin_product_category);
     }
 }

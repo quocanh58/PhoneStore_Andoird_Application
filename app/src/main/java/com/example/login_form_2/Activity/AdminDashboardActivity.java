@@ -2,16 +2,18 @@ package com.example.login_form_2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.QuickContactBadge;
 
+import com.example.login_form_2.QLLoaiSanPham;
 import com.example.login_form_2.R;
 
 public class AdminDashboardActivity extends AppCompatActivity {
-
+    Context that = this;
     Button btnQuanLyTaiKhoan, btnQuanLySP, btnQuanLyDonHang, btnQuanLyLoaiSP;
 
     @Override
@@ -49,8 +51,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnQuanLyLoaiSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent4 = new Intent(AdminDashboardActivity.this, AdminProductCategoryActivity.class);
-                startActivity(intent4);
+                Intent intent = new Intent(that, QLLoaiSanPham.class);
+                startActivity(intent);
             }
         });
     }
