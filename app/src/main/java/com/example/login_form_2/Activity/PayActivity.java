@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.login_form_2.InfoSanPham;
 import com.example.login_form_2.Notification.NotificationHelper;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.PayAdapter;
@@ -189,6 +191,21 @@ public class PayActivity extends AppCompatActivity {
                     }
                 });
                 System.out.println(request.toString());
+            }
+        });
+        lvPay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try{
+                    DataCart dataCart = dataCarts.get(position);
+                    Product product1 = dataCart.product;
+                    Intent intent = new Intent(that, ProductDetailActivity.class);
+                    intent.putExtra("product",product1);
+                    startActivity(intent);
+                }
+                catch (Exception e){
+
+                }
             }
         });
     }
