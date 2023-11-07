@@ -1,5 +1,7 @@
 package com.example.login_form_2.Activity;
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,10 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.login_form_2.CustomImageDialog;
 import com.example.login_form_2.InfoSanPham;
 import com.example.login_form_2.Notification.NotificationHelper;
+import com.example.login_form_2.PaymentMethod;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.PayAdapter;
 import com.example.login_form_2.model.Product;
@@ -47,6 +52,8 @@ public class PayActivity extends AppCompatActivity {
     private ArrayList<DataCart> dataCarts;
     private Product product;
 
+    RadioButton a, b, c;
+
     private ArrayList<Chitiet> muaLai = new ArrayList<>();
 
     @Override
@@ -60,6 +67,9 @@ public class PayActivity extends AppCompatActivity {
     long sum = 0;
 
     private void addControl() {
+        a = findViewById(R.id.radio_a);
+        b = findViewById(R.id.radio_b);
+
         txtTotalPricePay = findViewById(R.id.txtTotalPricePay);
 
 
@@ -88,10 +98,10 @@ public class PayActivity extends AppCompatActivity {
         }
 
         muaLai = (ArrayList<Chitiet>) intent.getSerializableExtra("mualai");
-        if(muaLai != null && muaLai.size() > 0){
+        if (muaLai != null && muaLai.size() > 0) {
             dataCarts.clear();
-            long sum = 0 ;
-            for(Chitiet chitiet : muaLai){
+            long sum = 0;
+            for (Chitiet chitiet : muaLai) {
                 DataCart dataCart = new DataCart();
                 dataCart.product = chitiet.sanpham;
                 dataCart.userID = GlobalStore.currentUser.id;
@@ -120,6 +130,108 @@ public class PayActivity extends AppCompatActivity {
         btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (a.isChecked()) {
+                    long sum = 0;
+                    LoadingDialog.setLoading(that, true);
+                    OrderRequest request = new OrderRequest();
+
+                    request.type = "insert";
+                    request.time = System.currentTimeMillis();
+                    request.UserID = Integer.parseInt(GlobalStore.currentUser.id);
+                    request.data = new ArrayList<>();
+                    for (DataCart dataCart : dataCarts) {
+                        Order order = new Order();
+                        order.dongia = Function.getDoubleNumber(dataCart.product.giasanpham);
+                        order.soluong = Integer.parseInt(dataCart.quantity);
+                        order.idsanpham = Integer.parseInt(dataCart.product.id);
+                        request.data.add(order);
+                        sum += Function.getLongNumber(dataCart.product.giasanpham) * Function.getLongNumber(dataCart.quantity);
+                    }
+
+                    request.totalPrice = sum; //cập nhật giá khi tạo mới 1 đơn hàng
+
+                    Call<OrderReponse> call = APIClient.getClient().create(OrderServices.class).addOrder(request);
+                    call.enqueue(new Callback<OrderReponse>() {
+                        @Override
+                        public void onResponse(Call<OrderReponse> call, Response<OrderReponse> response) {
+                            LoadingDialog.setLoading(that, false);
+                            if (response.code() == 200 && response.isSuccessful() && response.body() != null) {
+                                Alert.alert(that, response.body().message);
+                                NotificationHelper.showNotification(that, "Thông báo", response.body().message, "");
+                                // delete những item ở hàng sau khi đặt hàng
+                                for (DataCart dataCart : dataCarts) {
+                                    CartRequest request = new CartRequest();
+                                    request.type = "delete";
+                                    request.cartID = Function.getIntNumber(dataCart.id);
+                                    request.userID = Function.getIntNumber(GlobalStore.currentUser.id);
+                                    Call<GetCartReponse> call2 = APIClient.getClient().create(CartServices.class).deleteProductFromCart(request);
+                                    call2.enqueue(new Callback<GetCartReponse>() {
+                                        @Override
+                                        public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
+                                            LoadingDialog.setLoading(v.getContext(), false);
+                                            if (response.isSuccessful() && response.body() != null && response.body().result == 1) {
+                                                GlobalStore.currentDataCart = response.body().data;
+
+
+                                                if (product != null) {
+                                                    product = null;
+                                                } else if (muaLai != null && muaLai.size() > 0) {
+                                                    muaLai.clear();
+                                                } else {
+                                                    CartActivity.UpdateListView();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<GetCartReponse> call, Throwable t) {
+                                            t.printStackTrace();
+                                            LoadingDialog.setLoading(v.getContext(), false);
+                                        }
+                                    });
+                                }
+                                dataCarts.clear();
+                                payAdapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<OrderReponse> call, Throwable t) {
+                            LoadingDialog.setLoading(that, false);
+                            t.printStackTrace();
+                        }
+                    });
+                } else if (b.isChecked()) {
+                    Intent intent = new Intent(that, PaymentMethod.class);
+                    startActivityForResult(intent,1);
+                }
+
+
+            }
+        });
+        lvPay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    DataCart dataCart = dataCarts.get(position);
+                    Product product1 = dataCart.product;
+                    Intent intent = new Intent(that, ProductDetailActivity.class);
+                    intent.putExtra("product", product1);
+                    startActivity(intent);
+                } catch (Exception e) {
+
+                }
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
                 long sum = 0;
                 LoadingDialog.setLoading(that, true);
                 OrderRequest request = new OrderRequest();
@@ -146,7 +258,7 @@ public class PayActivity extends AppCompatActivity {
                         LoadingDialog.setLoading(that, false);
                         if (response.code() == 200 && response.isSuccessful() && response.body() != null) {
                             Alert.alert(that, response.body().message);
-                            NotificationHelper.showNotification(that, "Thông báo", response.body().message,"" );
+                            NotificationHelper.showNotification(that, "Thông báo", response.body().message, "");
                             // delete những item ở hàng sau khi đặt hàng
                             for (DataCart dataCart : dataCarts) {
                                 CartRequest request = new CartRequest();
@@ -157,25 +269,25 @@ public class PayActivity extends AppCompatActivity {
                                 call2.enqueue(new Callback<GetCartReponse>() {
                                     @Override
                                     public void onResponse(Call<GetCartReponse> call, Response<GetCartReponse> response) {
-                                        LoadingDialog.setLoading(v.getContext(), false);
+                                        LoadingDialog.setLoading(that, false);
                                         if (response.isSuccessful() && response.body() != null && response.body().result == 1) {
                                             GlobalStore.currentDataCart = response.body().data;
 
 
                                             if (product != null) {
                                                 product = null;
-                                            }
-                                            else if(muaLai != null && muaLai.size() > 0){
+                                            } else if (muaLai != null && muaLai.size() > 0) {
                                                 muaLai.clear();
-                                            }else {
+                                            } else {
                                                 CartActivity.UpdateListView();
                                             }
                                         }
                                     }
+
                                     @Override
                                     public void onFailure(Call<GetCartReponse> call, Throwable t) {
                                         t.printStackTrace();
-                                        LoadingDialog.setLoading(v.getContext(), false);
+                                        LoadingDialog.setLoading(that, false);
                                     }
                                 });
                             }
@@ -190,23 +302,8 @@ public class PayActivity extends AppCompatActivity {
                         t.printStackTrace();
                     }
                 });
-                System.out.println(request.toString());
             }
-        });
-        lvPay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try{
-                    DataCart dataCart = dataCarts.get(position);
-                    Product product1 = dataCart.product;
-                    Intent intent = new Intent(that, ProductDetailActivity.class);
-                    intent.putExtra("product",product1);
-                    startActivity(intent);
-                }
-                catch (Exception e){
-
-                }
-            }
-        });
+        }
     }
+
 }
