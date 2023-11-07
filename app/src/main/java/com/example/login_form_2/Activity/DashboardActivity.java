@@ -177,7 +177,6 @@ public class DashboardActivity extends AppCompatActivity {
                     for(LoaiSanPham loai : reponse.data){
                         mangLoaisp.add(loai);
                     }
-
                 }
                 else{
                     Alert.alert(that,"Lỗi get dữ liệu");
@@ -369,8 +368,6 @@ public class DashboardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
-                getDataLoaiSanPham();
                 getDataSanPham();
                 getDataCart(Long.parseLong(GlobalStore.currentUser.id));
             }
