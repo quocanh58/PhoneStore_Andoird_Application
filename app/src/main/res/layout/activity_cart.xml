@@ -24,6 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/txtThongbao"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:text="Chưa có đơn hàng nào"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </TextView>
             <ListView
                 android:id="@+id/lvCart"
                 android:layout_width="match_parent"

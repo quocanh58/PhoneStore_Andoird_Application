@@ -26,9 +26,11 @@ public class CartActivity extends AppCompatActivity  {
     Context that = this;
     public  static  ListView lvCart;
     CheckBox checkAllCart;
-    static TextView totalPrice;
+    static TextView totalPrice,txtThongbao;
     Button btnMuaHang;
     public static CartAdapter cartAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +97,15 @@ public class CartActivity extends AppCompatActivity  {
         lvCart.setAdapter(cartAdapter);
         checkAllCart = findViewById(R.id.btnCheckAllCart);
         totalPrice = findViewById(R.id.txtTotalPriceCart);
+        txtThongbao = findViewById(R.id.txtThongbao);
         btnMuaHang = findViewById(R.id.btnMuaHang);
         totalPrice.setText(Function.formatCurrency(CartAdapter.getTotalPriceCart()));
         // thêm cart
 
-
+        if(GlobalStore.currentDataCart.size() == 0){
+            txtThongbao.setVisibility(View.VISIBLE);
+            lvCart.setVisibility(View.GONE);
+        }
 
     }
 
