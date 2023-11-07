@@ -10,4 +10,6 @@ public class GlobalStore {
     public static User currentUser;
     public static ArrayList<DataCart> currentDataCart = new ArrayList<>();
     public static ArrayList<LoaiSanPham> currentArrLoaiSanPham = new ArrayList<>();
+
+    public static boolean isCurrentOpenningApp = true;
 }

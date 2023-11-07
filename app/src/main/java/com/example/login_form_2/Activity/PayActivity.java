@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.login_form_2.Notification.NotificationHelper;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.PayAdapter;
 import com.example.login_form_2.model.Product;
@@ -143,6 +144,8 @@ public class PayActivity extends AppCompatActivity {
                         LoadingDialog.setLoading(that, false);
                         if (response.code() == 200 && response.isSuccessful() && response.body() != null) {
                             Alert.alert(that, response.body().message);
+                            NotificationHelper.showNotification(that, "Thông báo", response.body().message,"" );
+                            // delete những item ở hàng sau khi đặt hàng
                             for (DataCart dataCart : dataCarts) {
                                 CartRequest request = new CartRequest();
                                 request.type = "delete";
@@ -155,6 +158,8 @@ public class PayActivity extends AppCompatActivity {
                                         LoadingDialog.setLoading(v.getContext(), false);
                                         if (response.isSuccessful() && response.body() != null && response.body().result == 1) {
                                             GlobalStore.currentDataCart = response.body().data;
+
+
                                             if (product != null) {
                                                 product = null;
                                             }

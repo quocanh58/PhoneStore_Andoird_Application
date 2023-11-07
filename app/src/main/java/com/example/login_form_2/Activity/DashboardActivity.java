@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.example.login_form_2.Notification.NotificationHelper;
 import com.example.login_form_2.R;
 import com.example.login_form_2.adapter.LoaispAdapter;
 import com.example.login_form_2.adapter.ProductAdapter;
@@ -100,7 +101,13 @@ public class DashboardActivity extends AppCompatActivity {
                     LoadingDialog.setLoading(that,false);
                     if(response.isSuccessful() && response.body() != null){
                         GlobalStore.currentDataCart = response.body().data;
-                        System.out.println(GlobalStore.currentDataCart);
+                        // notify when opening app
+                        if(GlobalStore.isCurrentOpenningApp ){
+                            if(GlobalStore.currentDataCart.size() > 0){
+                                NotificationHelper.showNotification(that,"Thông báo", "Bạn đang có " + GlobalStore.currentDataCart.size() + " đơn hàng chưa đặt.\n Đặt ngay nhé\n Happy day <3", "com.example.login_form_2.Activity.CartActivity");
+                                GlobalStore.isCurrentOpenningApp = false;
+                            }
+                        }
                     }
                     else{
                         Alert.alert(that,"Lỗi không get được cart onResponse");
