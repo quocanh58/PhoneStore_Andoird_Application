@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onResponse(Call<LoginReponse> call, Response<LoginReponse> response) {
 
                                         LoadingDialog.setLoading(that, false);
-                                        if(response.isSuccessful() ){
+                                        if (response.isSuccessful()) {
                                             LoginReponse reponse = response.body();
                                             System.out.println(reponse);
                                             if (reponse != null && reponse.result == 1) {
@@ -80,13 +80,12 @@ public class LoginActivity extends AppCompatActivity {
                                                     public void onPositiveButtonClick() {
                                                         GlobalStore.currentUser = reponse.user;
                                                         Intent intents = null;
-                                                       if(reponse.user.role.equals("user")){
-                                                            intents = new Intent( LoginActivity.this, DashboardActivity.class);
+                                                        if (reponse.user.role.equals("user")) {
+                                                            intents = new Intent(LoginActivity.this, DashboardActivity.class);
 
-                                                       }
-                                                       else if (reponse.user.role.equals("admin")){
-                                                           intents = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-                                                       }
+                                                        } else if (reponse.user.role.equals("admin")) {
+                                                            intents = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                                                        }
                                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                                         editor.putString("username", edtUsername.getText().toString());
                                                         editor.putString("password", edtPassword.getText().toString());
@@ -100,13 +99,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                                     }
                                                 });
+                                            } else {
+                                                Alert.alert(that, "Lỗi đăng nhập");
                                             }
-                                            else{
-                                                Alert.alert(that,"Lỗi đăng nhập");
-                                            }
-                                        }
-                                        else{
-                                            Alert.alert(that,"Server đang bảo trì");
+                                        } else {
+                                            Alert.alert(that, "Server đang bảo trì");
                                         }
                                     }
 
@@ -135,14 +132,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin1);
         btnSignUpEmail = findViewById(R.id.btnSignUpEmail);
 
-       try{
-           String username = sharedPreferences.getString("username", "");
-           String password = sharedPreferences.getString("password", "");
-           edtUsername.setText(username);
-           edtPassword.setText(password);
-       }
-       catch (Exception e){
+        try {
+            String username = sharedPreferences.getString("username", "");
+            String password = sharedPreferences.getString("password", "");
+            edtUsername.setText(username);
+            edtPassword.setText(password);
+        } catch (Exception e) {
 
-       }
+        }
     }
 }

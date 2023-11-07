@@ -139,8 +139,7 @@ public class DashboardActivity extends AppCompatActivity {
                             Product product = productList.get(position1);
                             Intent intent = new Intent(that, ProductDetailActivity.class);
                             intent.putExtra("product", product);
-
-                            startActivity(intent);
+                            startActivityForResult(intent,1);
                         });
                         recyclerViewDashboard.setAdapter(productAdapter);
 
@@ -243,7 +242,7 @@ public class DashboardActivity extends AppCompatActivity {
                                     /*Alert.alert(that,product.toString());*/
                                     Intent intent = new Intent(that, ProductDetailActivity.class);
                                     intent.putExtra("product", product);
-                                    startActivity(intent);
+                                    startActivityForResult(intent,1);
                                 });
                                 recyclerViewDashboard.setAdapter(productAdapter);
 
@@ -331,14 +330,14 @@ public class DashboardActivity extends AppCompatActivity {
 
         if (id == R.id.action_right_button) {
             Intent intent = new Intent(that, CartActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,1);
             return true;
         }
 
         if(id == R.id.my_order_button){
             //Alert.alert(that,"Đang phát triển");
             Intent intent = new Intent(that, OrderActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,1);
             return true;
         }
 
@@ -364,5 +363,19 @@ public class DashboardActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(productList);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+
+                getDataLoaiSanPham();
+                getDataSanPham();
+                getDataCart(Long.parseLong(GlobalStore.currentUser.id));
+            }
+        }
+    }
+
 
 }

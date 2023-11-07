@@ -2,6 +2,7 @@ package com.example.login_form_2.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -110,5 +111,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         textViewProductQuantity = findViewById(R.id.textViewProductQuantity);
         btnMua = findViewById(R.id.btnMua);
         btnThemGioHang = findViewById(R.id.btnThemGioHang);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 }
