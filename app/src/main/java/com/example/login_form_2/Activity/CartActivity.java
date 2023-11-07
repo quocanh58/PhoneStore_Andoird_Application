@@ -78,8 +78,6 @@ public class CartActivity extends AppCompatActivity  {
                 System.out.println(dataCartsSeleted.toString());
                 Intent intent = new Intent(that,PayActivity.class);
                 startActivity(intent);
-
-
             }
         });
     }
